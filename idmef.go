@@ -3,6 +3,8 @@ package idmef
 import (
 	"encoding/xml"
 	"time"
+
+	"github.com/grokify/go-idmef/timestamp"
 )
 
 const (
@@ -38,6 +40,10 @@ type Alert struct {
 type Time struct {
 	Time     time.Time `xml:",chardata"`
 	NtpStamp string    `xml:"ntpstamp,attr"`
+}
+
+func (t *Time) InflateNtpStamp() {
+	t.NtpStamp = timestamp.TimeToNtp(t.Time)
 }
 
 type Source struct {

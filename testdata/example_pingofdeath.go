@@ -8,12 +8,12 @@ import (
 
 // SampleAlert provides the sample file from
 // https://en.wikipedia.org/wiki/Intrusion_Detection_Message_Exchange_Format
-func SampleAlert() idmef.Message {
+func SampleAlert() *idmef.Message {
 	dt, err := time.Parse(time.RFC3339, "2000-03-09T10:01:25.93464Z")
 	if err != nil {
 		panic(err)
 	}
-	return idmef.Message{
+	msg := &idmef.Message{
 		XMLNSIDMEF: idmef.XMLNSIDMEFUrl,
 		Version:    idmef.XMLNSIDMEFVersion,
 		Alert: &idmef.Alert{
@@ -79,4 +79,6 @@ func SampleAlert() idmef.Message {
 			},
 		},
 	}
+	msg.Alert.CreateTime.InflateNtpStamp()
+	return msg
 }
