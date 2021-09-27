@@ -20,18 +20,18 @@ IDMEF format (IETF RFC 4765).
 
 ## Implementation
 
-- [ ] IDMEF-Message
-  - [ ] Alert
+- [x] IDMEF-Message
+  - [x] Alert
     - [x] Analyzer
     - [x] CreateTime
     - [x] DetectTime
     - [x] AnalyzerTime
-    - [ ] Source
+    - [x] Source
       - [x] Node
       - [ ] User
       - [ ] Process
       - [ ] Service
-    - [ ] Target
+    - [x] Target
       - [x] Node
       - [ ] User
       - [ ] Process
