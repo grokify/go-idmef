@@ -24,6 +24,13 @@ func (m *Message) Common() *idmef.Message {
 	return cm
 }
 
+func (m *Message) Bytes(prefix, indent string) ([]byte, error) {
+	if prefix == "" && indent == "" {
+		return xml.Marshal(m)
+	}
+	return xml.MarshalIndent(m, prefix, indent)
+}
+
 type Alert struct {
 	MessageId      string          `xml:"messageid,attr"`
 	Analyzer       *Analyzer       `xml:"http://iana.org/idmef Analyzer"`

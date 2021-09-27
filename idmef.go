@@ -19,6 +19,13 @@ type Message struct {
 	Alert      *Alert   `xml:"idmef:Alert"`
 }
 
+func (m *Message) Bytes(prefix, indent string) ([]byte, error) {
+	if prefix == "" && indent == "" {
+		return xml.Marshal(m)
+	}
+	return xml.MarshalIndent(m, prefix, indent)
+}
+
 type Alert struct {
 	MessageId      string          `xml:"messageid,attr"`
 	Analyzer       *Analyzer       `xml:"idmef:Analyzer"`
@@ -34,7 +41,7 @@ type Time struct {
 }
 
 type Source struct {
-	Indent  string `xml:"ident,attr"`
+	Indent  string `xml:"ident,attr,omitempty"`
 	Spoofed string `xml:"spoofed,attr,omitempty"`
 	Node    *Node  `xml:"idmef:Node"`
 }
