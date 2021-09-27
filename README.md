@@ -18,7 +18,7 @@
 Go library for authoring and parsing data in
 IDMEF format (IETF RFC 4765).
 
-## Implementation
+## Status
 
 - [x] IDMEF-Message
   - [x] Alert
@@ -44,6 +44,11 @@ IDMEF format (IETF RFC 4765).
     - [ ] CreateTime
     - [ ] AdditionalData
 
+## Notes
+
+1. `idmef` is the authoring package and creates XML with the `idmef` tag.
+1. `unmarshal` is the parsing package which reads in XML files but does not support the `idmef` tag prefix due to [Go issue 9519](https://github.com/golang/go/issues/9519). Unmarshal or parse a file using `unmarshal` to receive a `*unmarshal.Message` which can then be converted to an authoring struct with `*unmarshal.Message.Common()`.
+
 ## References
 
 ### IDMEF
@@ -57,6 +62,12 @@ IDMEF format (IETF RFC 4765).
 
 * OSSEC: https://www.ossec.net/docs/formats/alerts.html
 * OSSEM: https://github.com/OTRF/OSSEM
+
+### Go XML situation
+
+1. [encoding/xml: support for XML namespace prefixes](https://github.com/golang/go/issues/9519)
+1. [xml namespace prefix issue at go](https://stackoverflow.com/questions/48609596/xml-namespace-prefix-issue-at-go)
+1. [Unable to parse xml in GO with : in tags](https://stackoverflow.com/questions/34820549/unable-to-parse-xml-in-go-with-in-tags)
 
 ## Credits
 
