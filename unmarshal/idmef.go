@@ -46,34 +46,37 @@ func (m *Message) Bytes(prefix, indent string) ([]byte, error) {
 }
 
 type Alert struct {
-	MessageId      string          `xml:"messageid,attr"`
-	Analyzer       *Analyzer       `xml:"http://iana.org/idmef Analyzer"`
-	CreateTime     *Time           `xml:"http://iana.org/idmef CreateTime"`
-	Source         *Source         `xml:"http://iana.org/idmef Source"`
-	Target         []*Source       `xml:"http://iana.org/idmef Target"`
-	Classification *Classification `xml:"http://iana.org/idmef Classification"`
+	MessageId      string         `xml:"messageid,attr"`
+	Analyzer       Analyzer       `xml:"http://iana.org/idmef Analyzer"`
+	CreateTime     Time           `xml:"http://iana.org/idmef CreateTime"`
+	DetectTime     *Time          `xml:"http://iana.org/idmef DetectTime"`
+	AnalyzerTime   *Time          `xml:"http://iana.org/idmef AnalyzerTime"`
+	Source         []Source       `xml:"http://iana.org/idmef Source"`
+	Target         []Source       `xml:"http://iana.org/idmef Target"`
+	Classification Classification `xml:"http://iana.org/idmef Classification"`
 }
 
 func (a *Alert) Common() *idmef.Alert {
 	cm := &idmef.Alert{
-		MessageId: a.MessageId,
-		Target:    []*idmef.Source{}}
-	if a.Analyzer != nil {
-		cm.Analyzer = a.Analyzer.Common()
+		MessageId:      a.MessageId,
+		Analyzer:       a.Analyzer.Common(),
+		CreateTime:     a.CreateTime.Common(),
+		Source:         []idmef.Source{},
+		Target:         []idmef.Source{},
+		Classification: a.Classification.Common()}
+	if a.DetectTime != nil {
+		dt := a.DetectTime.Common()
+		cm.DetectTime = &dt
 	}
-	if a.CreateTime != nil {
-		cm.CreateTime = a.CreateTime.Common()
+	if a.AnalyzerTime != nil {
+		dt := a.AnalyzerTime.Common()
+		cm.AnalyzerTime = &dt
 	}
-	if a.Source != nil {
-		cm.Source = a.Source.Common()
+	for _, s := range a.Source {
+		cm.Source = append(cm.Source, s.Common())
 	}
-	if len(a.Target) > 0 {
-		for _, t := range a.Target {
-			cm.Target = append(cm.Target, t.Common())
-		}
-	}
-	if a.Classification != nil {
-		cm.Classification = a.Classification.Common()
+	for _, t := range a.Target {
+		cm.Target = append(cm.Target, t.Common())
 	}
 	return cm
 }
@@ -83,8 +86,8 @@ type Time struct {
 	NtpStamp string    `xml:"ntpstamp,attr"`
 }
 
-func (t *Time) Common() *idmef.Time {
-	return &idmef.Time{
+func (t *Time) Common() idmef.Time {
+	return idmef.Time{
 		Time:     t.Time,
 		NtpStamp: t.NtpStamp}
 }
@@ -95,8 +98,8 @@ type Source struct {
 	Node    *Node  `xml:"http://iana.org/idmef Node"`
 }
 
-func (s *Source) Common() *idmef.Source {
-	cm := &idmef.Source{
+func (s *Source) Common() idmef.Source {
+	cm := idmef.Source{
 		Indent:  s.Indent,
 		Spoofed: s.Spoofed}
 	if s.Node != nil {
@@ -143,8 +146,8 @@ type Analyzer struct {
 	Node       *Node  `xml:"http://iana.org/idmef Node"`
 }
 
-func (a *Analyzer) Common() *idmef.Analyzer {
-	cm := &idmef.Analyzer{
+func (a *Analyzer) Common() idmef.Analyzer {
+	cm := idmef.Analyzer{
 		AnalyzerId: a.AnalyzerId}
 	if a.Node != nil {
 		cm.Node = a.Node.Common()
@@ -157,8 +160,8 @@ type Classification struct {
 	Reference *Reference `xml:"http://iana.org/idmef Reference"`
 }
 
-func (cl *Classification) Common() *idmef.Classification {
-	cm := &idmef.Classification{
+func (cl *Classification) Common() idmef.Classification {
+	cm := idmef.Classification{
 		Text: cl.Text}
 	if cl.Reference != nil {
 		cm.Reference = cl.Reference.Common()

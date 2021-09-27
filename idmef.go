@@ -29,12 +29,14 @@ func (m *Message) Bytes(prefix, indent string) ([]byte, error) {
 }
 
 type Alert struct {
-	MessageId      string          `xml:"messageid,attr"`
-	Analyzer       *Analyzer       `xml:"idmef:Analyzer"`
-	CreateTime     *Time           `xml:"idmef:CreateTime"`
-	Source         *Source         `xml:"idmef:Source"`
-	Target         []*Source       `xml:"idmef:Target"`
-	Classification *Classification `xml:"idmef:Classification"`
+	MessageId      string         `xml:"messageid,attr"`
+	Analyzer       Analyzer       `xml:"idmef:Analyzer"`       // Exactly one.
+	CreateTime     Time           `xml:"idmef:CreateTime"`     // Exactly one.
+	DetectTime     *Time          `xml:"idmef:DetectTime"`     // Zero or one
+	AnalyzerTime   *Time          `xml:"idmef:AnalyzerTime"`   // Zero or one.
+	Source         []Source       `xml:"idmef:Source"`         // Zero or more.
+	Target         []Source       `xml:"idmef:Target"`         // Zero or more.
+	Classification Classification `xml:"idmef:Classification"` // Exactly one.
 }
 
 type Time struct {

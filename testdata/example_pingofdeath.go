@@ -18,30 +18,32 @@ func SampleAlert() *idmef.Message {
 		Version:    idmef.XMLNSIDMEFVersion,
 		Alert: &idmef.Alert{
 			MessageId: "abc123456789",
-			Analyzer: &idmef.Analyzer{
+			Analyzer: idmef.Analyzer{
 				AnalyzerId: "bc-sensor01",
 				Node: &idmef.Node{
 					Category: "dns",
 					Name:     "sensor.example.com",
 				},
 			},
-			CreateTime: &idmef.Time{
+			CreateTime: idmef.Time{
 				Time:     dt,
 				NtpStamp: "0xbc71f4f5.0xef449129",
 			},
-			Source: &idmef.Source{
-				Indent:  "a1a2",
-				Spoofed: "yes",
-				Node: &idmef.Node{
-					Indent: "a1a2-1",
-					Address: &idmef.Address{
-						Indent:   "a1a2-2",
-						Category: "ipv4-addr",
-						Address:  "192.0.2.200",
+			Source: []idmef.Source{
+				{
+					Indent:  "a1a2",
+					Spoofed: "yes",
+					Node: &idmef.Node{
+						Indent: "a1a2-1",
+						Address: &idmef.Address{
+							Indent:   "a1a2-2",
+							Category: "ipv4-addr",
+							Address:  "192.0.2.200",
+						},
 					},
 				},
 			},
-			Target: []*idmef.Source{
+			Target: []idmef.Source{
 				{
 					Indent: "b3b4",
 					Node: &idmef.Node{
@@ -69,7 +71,7 @@ func SampleAlert() *idmef.Message {
 					},
 				},
 			},
-			Classification: &idmef.Classification{
+			Classification: idmef.Classification{
 				Text: "Ping-of-death detected",
 				Reference: &idmef.Reference{
 					Origin: "cve",
