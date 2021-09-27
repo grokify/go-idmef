@@ -13,7 +13,7 @@ const testFileXML = "../testdata/example_pingofdeath.xml"
 func TestSampleAlert(t *testing.T) {
 	sampleGo := testdata.SampleAlert()
 
-	sampleFile, err := ParseFile(testFileXML)
+	sampleFile, err := ReadFile(testFileXML)
 	if err != nil {
 		t.Errorf("unmarshal.ParseFile(\"%s\") error[%s]",
 			testFileXML, err.Error())

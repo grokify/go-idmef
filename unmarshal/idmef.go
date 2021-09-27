@@ -15,7 +15,7 @@ type Message struct {
 	Alert      *Alert   `xml:"http://iana.org/idmef Alert"`
 }
 
-func ParseFile(filename string) (*idmef.Message, error) {
+func ReadFile(filename string) (*idmef.Message, error) {
 	fdata, err := os.ReadFile(filename)
 	if err != nil {
 		return nil, err
