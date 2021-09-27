@@ -57,3 +57,8 @@ IDMEF format (IETF RFC 4765).
 
 * OSSEC: https://www.ossec.net/docs/formats/alerts.html
 * OSSEM: https://github.com/OTRF/OSSEM
+
+## Credits
+
+`timestamp.Timestamp` is based on code from `github.com/coreos/mantle` under the Apache 2.0 license. This is a large, archived
+codebase with many dependencies.
