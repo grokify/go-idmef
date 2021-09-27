@@ -1,4 +1,4 @@
-package timestamp
+package ntp
 
 import (
 	"strconv"

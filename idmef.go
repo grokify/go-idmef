@@ -4,7 +4,7 @@ import (
 	"encoding/xml"
 	"time"
 
-	"github.com/grokify/go-idmef/timestamp"
+	"github.com/grokify/go-idmef/ntp"
 )
 
 const (
@@ -45,7 +45,7 @@ type Time struct {
 }
 
 func (t *Time) InflateNtpStamp() {
-	t.NtpStamp = timestamp.TimeToNtp(t.Time)
+	t.NtpStamp = ntp.TimeToNtp(t.Time)
 }
 
 type Source struct {
