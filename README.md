@@ -18,6 +18,18 @@
 Go library for authoring and parsing data in
 IDMEF format (IETF RFC 4765).
 
+## Usage
+
+### Authoring
+
+Use the `go-idmef` (`idmef`) package structs to create the `idmef.Message` struct and then call `xml.Marshal()` or `idmef.Message.Bytes()`.
+
+An example is in the [testdata/example_pingofdeath.go](https://github.com/grokify/go-idmef/blob/v0.1.0/testdata/example_pingofdeath.go) file.
+
+### Parsing
+
+See [`unmarshal.ReadFile()`](https://pkg.go.dev/github.com/grokify/go-idmef/unmarshal#ReadFile) function for an example to parse aa IDMEF XML file.
+
 ## Status
 
 - [x] IDMEF-Message
