@@ -2,6 +2,7 @@ package unmarshal
 
 import (
 	"encoding/xml"
+	"os"
 	"time"
 
 	"github.com/grokify/go-idmef"
@@ -12,6 +13,19 @@ type Message struct {
 	XMLNSIDMEF string   `xml:"xmlns:idmef,attr"`
 	Version    string   `xml:"version,attr"`
 	Alert      *Alert   `xml:"http://iana.org/idmef Alert"`
+}
+
+func ParseFile(filename string) (*idmef.Message, error) {
+	fdata, err := os.ReadFile(filename)
+	if err != nil {
+		return nil, err
+	}
+	unMsg := &Message{}
+	err = xml.Unmarshal(fdata, unMsg)
+	if err != nil {
+		return nil, err
+	}
+	return unMsg.Common(), nil
 }
 
 func (m *Message) Common() *idmef.Message {
