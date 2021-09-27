@@ -20,6 +20,8 @@ IDMEF format (IETF RFC 4765).
 
 ## Usage
 
+There are two sets of Message structs, one for authoring and one for parsing. The reason is due to Go's lack of support for parsing XML with tag prefixes.
+
 ### Authoring
 
 Use the `go-idmef` (`idmef`) package structs to create the `idmef.Message` struct and then call `xml.Marshal()` or `idmef.Message.Bytes()`.
@@ -78,7 +80,7 @@ See [`unmarshal.ReadFile()`](https://pkg.go.dev/github.com/grokify/go-idmef/unma
 ### Go XML situation
 
 1. [encoding/xml: support for XML namespace prefixes](https://github.com/golang/go/issues/9519)
-1. [xml namespace prefix issue at go](https://stackoverflow.com/questions/48609596/xml-namespace-prefix-issue-at-go)
+1. [xml namespace prefix issue at go](https://stackoverflow.com/questions/48609596/xml-namespace-prefix-issue-at-go): "To fix that you need to use two structs, one for Unmarshalling and second to Marshalling data"
 1. [Unable to parse xml in GO with : in tags](https://stackoverflow.com/questions/34820549/unable-to-parse-xml-in-go-with-in-tags)
 
 ## Credits
