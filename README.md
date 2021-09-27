@@ -16,14 +16,18 @@
  [license-url]: https://github.com/grokify/go-idmef/blob/master/LICENSE
 
 Go library for authoring and parsing data in
-IDMEF format.
+IDMEF format (IETF RFC 4765).
 
-Read more on Wikipedia:
+## References
 
-IDMEF: https://en.wikipedia.org/wiki/Intrusion_Detection_Message_Exchange_Format
+### IDMEF
 
-Alternative formats are:
+* [IETF RFC 4765: Format Details](https://datatracker.ietf.org/doc/html/rfc4765)
+* [IETF RFC 4766: Format Requirements](https://datatracker.ietf.org/doc/html/rfc4766)
+* [IETF RFC 4767: Recommended Transport Protocol (IDXP)](https://datatracker.ietf.org/doc/html/rfc4767)
+* [IDMEF on Wikipedia](https://en.wikipedia.org/wiki/Intrusion_Detection_Message_Exchange_Format)
 
-OSSEC: https://www.ossec.net/docs/formats/alerts.html
+### Alternative Formats
 
-OSSEM: https://github.com/OTRF/OSSEM
+* OSSEC: https://www.ossec.net/docs/formats/alerts.html
+* OSSEM: https://github.com/OTRF/OSSEM
