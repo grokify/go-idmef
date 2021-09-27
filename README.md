@@ -18,6 +18,32 @@
 Go library for authoring and parsing data in
 IDMEF format (IETF RFC 4765).
 
+## Implementation
+
+- [ ] IDMEF-Message
+  - [ ] Alert
+    - [x] Analyzer
+    - [x] CreateTime
+    - [x] DetectTime
+    - [x] AnalyzerTime
+    - [ ] Source
+      - [x] Node
+      - [ ] User
+      - [ ] Process
+      - [ ] Service
+    - [ ] Target
+      - [x] Node
+      - [ ] User
+      - [ ] Process
+      - [ ] Service
+    - [x] Classification
+    - [ ] Assessment
+    - [ ] AdditionalData
+  - [ ] Heartbeat
+    - [ ] Analyzer
+    - [ ] CreateTime
+    - [ ] AdditionalData
+
 ## References
 
 ### IDMEF
