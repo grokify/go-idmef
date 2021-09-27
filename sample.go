@@ -53,7 +53,9 @@ func SampleAlert() Message {
 				{
 					Indent: "c5c6",
 					Node: &Node{
-						Name: "lollipop",
+						Indent:   "c5c6-1",
+						Category: "nisplus",
+						Name:     "lollipop",
 					},
 				},
 				{
