@@ -11,27 +11,26 @@ const testFileXML = "../testdata/example_pingofdeath.xml"
 
 // TestSampleAlert ensures parse sample correct.
 func TestSampleAlert(t *testing.T) {
-	sampleGo := testdata.SampleAlert()
+	mGo := testdata.SampleAlert()
 
-	sampleFile, err := ReadFile(testFileXML)
+	mFile, err := ReadFile(testFileXML)
 	if err != nil {
 		t.Errorf("unmarshal.ParseFile(\"%s\") error[%s]",
 			testFileXML, err.Error())
 	}
 
-	s1, err := sampleGo.Bytes("", "  ")
+	xGo, err := mGo.Bytes("", "  ")
 	if err != nil {
-		t.Errorf("xml.Unmarshal Marshal error[%s]",
-			err.Error())
+		t.Errorf("xml.Unmarshal Marshal error[%s]", err.Error())
 	}
-	s2, err := sampleFile.Bytes("", "  ")
+
+	xFile, err := mFile.Bytes("", "  ")
 	if err != nil {
-		t.Errorf("xml.Unmarshal Marshal error[%s]",
-			err.Error())
+		t.Errorf("xml.Unmarshal Marshal error[%s]", err.Error())
 	}
-	if string(s1) != string(s2) {
-		fmt.Println(string(s1))
-		fmt.Println(string(s2))
-		t.Error("idmef.SampleAlert() does not match test file.")
+	if string(xGo) != string(xFile) {
+		fmt.Println(string(xGo))
+		fmt.Println(string(xFile))
+		t.Error("testdata.SampleAlert() does not match test file.")
 	}
 }
