@@ -25,10 +25,7 @@ func SampleAlert() *idmef.Message {
 					Name:     "sensor.example.com",
 				},
 			},
-			CreateTime: idmef.Time{
-				Time:     dt,
-				NtpStamp: "0xbc71f4f5.0xef449129",
-			},
+			CreateTime: idmef.NewTime(dt),
 			Source: []idmef.Source{
 				{
 					Indent:  "a1a2",
@@ -81,6 +78,5 @@ func SampleAlert() *idmef.Message {
 			},
 		},
 	}
-	msg.Alert.CreateTime.InflateNtpStamp()
 	return msg
 }
