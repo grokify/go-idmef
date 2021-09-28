@@ -58,6 +58,15 @@ See [`unmarshal.ReadFile()`](https://pkg.go.dev/github.com/grokify/go-idmef/unma
     - [ ] CreateTime
     - [ ] AdditionalData
 
+## Examples
+
+- [x] Denial-of-Service Attacks
+  - [x] [The "teardrop" Attack](examples/example_teardrop-attack.go) ([xml](examples/example_teardrop-attack.xml))
+  - [x] [The "ping of death" Attack](examples/example_pingofdeath-attack.go) ([xml](examples/example_pingofdeath-attack.xml))
+- [ ] Port Scanning Attacks
+  - [ ] Connection to a Disallowed Service
+  - [ ] Simple Port Scanning
+
 ## Notes
 
 1. `idmef` is the authoring package and creates XML with the `idmef` tag.
@@ -82,6 +91,10 @@ See [`unmarshal.ReadFile()`](https://pkg.go.dev/github.com/grokify/go-idmef/unma
 1. [encoding/xml: support for XML namespace prefixes](https://github.com/golang/go/issues/9519)
 1. [xml namespace prefix issue at go](https://stackoverflow.com/questions/48609596/xml-namespace-prefix-issue-at-go): "To fix that you need to use two structs, one for Unmarshalling and second to Marshalling data"
 1. [Unable to parse xml in GO with : in tags](https://stackoverflow.com/questions/34820549/unable-to-parse-xml-in-go-with-in-tags)
+
+### Other Implementations
+
+1. PHP - https://github.com/fpoirotte/php-idmef
 
 ## Credits
 
