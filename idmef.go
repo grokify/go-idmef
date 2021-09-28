@@ -44,6 +44,12 @@ type Time struct {
 	NtpStamp string    `xml:"ntpstamp,attr"`
 }
 
+func NewTime(t time.Time) Time {
+	tm := Time{Time: t}
+	tm.InflateNtpStamp()
+	return tm
+}
+
 func (t *Time) InflateNtpStamp() {
 	t.NtpStamp = ntp.TimeToNtp(t.Time)
 }
@@ -63,9 +69,10 @@ type Node struct {
 }
 
 type Address struct {
-	Address  string `xml:"idmef:address"`
 	Indent   string `xml:"ident,attr"`
 	Category string `xml:"category,attr"`
+	Address  string `xml:"idmef:address"`
+	Netmask  string `xml:"idmef:netmask"`
 }
 
 type Analyzer struct {

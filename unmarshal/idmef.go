@@ -129,16 +129,18 @@ func (n *Node) Common() *idmef.Node {
 }
 
 type Address struct {
-	Address  string `xml:"http://iana.org/idmef address"`
 	Indent   string `xml:"ident,attr"`
 	Category string `xml:"category,attr"`
+	Address  string `xml:"http://iana.org/idmef address"`
+	Netmask  string `xml:"http://iana.org/idmef netmask"`
 }
 
 func (a *Address) Common() *idmef.Address {
 	return &idmef.Address{
-		Address:  a.Address,
 		Indent:   a.Indent,
-		Category: a.Category}
+		Category: a.Category,
+		Address:  a.Address,
+		Netmask:  a.Netmask}
 }
 
 type Analyzer struct {
