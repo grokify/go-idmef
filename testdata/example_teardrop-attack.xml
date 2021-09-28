@@ -9,9 +9,7 @@
 				<idmef:name>analyzer01.example.com</idmef:name>
 			</idmef:Node>
 		</idmef:Analyzer>
-		<idmef:CreateTime ntpstamp="0xbc723b45.0xef449129">
-		2000-03-09T10:01:25.93464-05:00
-		</idmef:CreateTime>
+		<idmef:CreateTime ntpstamp="0xbc723b45.0xef449129">2000-03-09T10:01:25.93464-05:00</idmef:CreateTime>
 		<idmef:Source ident="a1b2c3d4">
 			<idmef:Node ident="a1b2c3d4-001" category="dns">
 				<idmef:name>badguy.example.net</idmef:name>
