@@ -66,10 +66,10 @@ See [`unmarshal.ReadFile()`](https://pkg.go.dev/github.com/grokify/go-idmef/unma
 ## Examples
 
 - [x] Denial-of-Service Attacks
-  - [x] [The "teardrop" Attack](testdata/example_teardrop-attack.go) ([xml](testdata/example_teardrop-attack.xml))
-  - [x] [The "ping of death" Attack](testdata/example_pingofdeath-attack.go) ([xml](testdata/example_pingofdeath-attack.xml))
+  - [x] [The "teardrop" Attack](testdata/example_dos_teardrop-attack.go) ([xml](testdata/example_dos_teardrop-attack.xml))
+  - [x] [The "ping of death" Attack](testdata/example_dos_pingofdeath-attack.go) ([xml](testdata/example_dos_pingofdeath-attack.xml))
 - [ ] Port Scanning Attacks
-  - [ ] Connection to a Disallowed Service
+  - [x] [Connection to a Disallowed Service](testdata/example_port-scanning_connection-to-disallowed-service.go) ([xml](testdata/example_port-scanning_connection-to-disallowed-service.xml)
   - [ ] Simple Port Scanning
 
 ## Notes
