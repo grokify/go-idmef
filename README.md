@@ -54,7 +54,7 @@ See [`unmarshal.ReadFile()`](https://pkg.go.dev/github.com/grokify/go-idmef/unma
       - [x] User
       - [x] Process
       - [x] Service
-      - [ ] File
+      - [x] File
     - [x] Classification
     - [x] Assessment
     - [ ] AdditionalData
@@ -74,7 +74,7 @@ See [`unmarshal.ReadFile()`](https://pkg.go.dev/github.com/grokify/go-idmef/unma
 - [ ] Local Attacks
   - [ ] The "loadmodule" Attack
   - [ ] The "phf" Attack
-  - [ ] File Modification ([xml](testdata/example_local-attacks_file-modification.xml))
+  - [x] [File Modification](testdata/example_local-attacks_file-modification.go) ([xml](testdata/example_local-attacks_file-modification.xml))
 - [ ] System Policy Violation
 - [ ] Correlated Alerts
 - [x] [Analyzer Assessments](testdata/example_analyzer-assessments.go) ([xml](testdata/example_analyzer-assessments.xml))
