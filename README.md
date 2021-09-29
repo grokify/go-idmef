@@ -36,7 +36,7 @@ An example is in the [testdata/example_pingofdeath.go](https://github.com/grokif
 
 See [`unmarshal.ReadFile()`](https://pkg.go.dev/github.com/grokify/go-idmef/unmarshal#ReadFile) function for an example to parse aa IDMEF XML file.
 
-## Status
+## Coverage
 
 - [x] IDMEF-Message
   - [x] Alert
@@ -56,7 +56,7 @@ See [`unmarshal.ReadFile()`](https://pkg.go.dev/github.com/grokify/go-idmef/unma
       - [x] Service
       - [ ] File
     - [x] Classification
-    - [ ] Assessment
+    - [x] Assessment
     - [ ] AdditionalData
   - [ ] Heartbeat
     - [ ] Analyzer
