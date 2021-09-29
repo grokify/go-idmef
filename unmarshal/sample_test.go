@@ -6,41 +6,18 @@ import (
 
 	"github.com/grokify/go-idmef"
 	"github.com/grokify/go-idmef/testdata"
+	"github.com/sergi/go-diff/diffmatchpatch"
 )
 
 const (
-	testFileXML = "../testdata/example_pingofdeath.xml"
+	testFileXML = "../testdata/example_dos_pingofdeath-attack.xml"
 )
 
 // TestSampleAlert ensures parse sample correct.
 func TestSampleAlert(t *testing.T) {
-	compare(t, testFileXML, testdata.SampleAlert)
-	compare(t, "../testdata/example_teardrop-attack.xml", testdata.SampleAlertTeardropAttack)
-	/*
-		mGo := testdata.SampleAlert()
-
-		mFile, err := ReadFile(testFileXML)
-		if err != nil {
-			t.Errorf("unmarshal.ParseFile(\"%s\") error[%s]",
-				testFileXML, err.Error())
-		}
-
-		xGo, err := mGo.Bytes("", "  ")
-		if err != nil {
-			t.Errorf("xml.Unmarshal Marshal error[%s]", err.Error())
-		}
-
-		xFile, err := mFile.Bytes("", "  ")
-		if err != nil {
-			t.Errorf("xml.Unmarshal Marshal error[%s]", err.Error())
-		}
-		if string(xGo) != string(xFile) {
-			fmt.Println(string(xGo))
-			fmt.Println(string(xFile))
-			t.Error("testdata.SampleAlert() does not match test file.")
-		}
-	*/
-
+	compare(t, testFileXML, testdata.ExampleAlertPingOfDeathAttack)
+	compare(t, "../testdata/example_dos_teardrop-attack.xml", testdata.ExampleAlertTeardropAttack)
+	compare(t, "../testdata/example_port-scanning_connection-to-disallowed-service.xml", testdata.ExamplePortScanningDisallowedService)
 }
 
 func compare(t *testing.T, testFileXML string, sampleMessage func() *idmef.Message) {
@@ -64,6 +41,13 @@ func compare(t *testing.T, testFileXML string, sampleMessage func() *idmef.Messa
 	if string(xGo) != string(xFile) {
 		fmt.Println(string(xGo))
 		fmt.Println(string(xFile))
-		t.Error("testdata.SampleAlert() does not match test file.")
+
+		fmt.Println(">>> DIFF >>>")
+		dmp := diffmatchpatch.New()
+		diffs := dmp.DiffMain(string(xGo), string(xFile), false)
+		fmt.Println(dmp.DiffPrettyText(diffs))
+		fmt.Println("<<< DIFF <<<")
+
+		t.Errorf("Go does not match test file [%s]", testFileXML)
 	}
 }
