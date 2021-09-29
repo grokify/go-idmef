@@ -18,6 +18,10 @@
 Go library for authoring and parsing data in
 IDMEF format (IETF RFC 4765).
 
+Here's an article comparing IDMEF to other formats:
+
+[Power of the IDMEF format](https://www.prelude-siem.com/en/power-of-the-idmef-format/)
+
 ## Usage
 
 There are two sets of Message structs, one for authoring and one for parsing. The reason is due to Go's lack of support for parsing XML with tag prefixes.
@@ -42,14 +46,15 @@ See [`unmarshal.ReadFile()`](https://pkg.go.dev/github.com/grokify/go-idmef/unma
     - [x] AnalyzerTime
     - [x] Source
       - [x] Node
-      - [ ] User
+      - [x] User
       - [ ] Process
-      - [ ] Service
+      - [x] Service
     - [x] Target
       - [x] Node
-      - [ ] User
+      - [x] User
       - [ ] Process
-      - [ ] Service
+      - [x] Service
+      - [ ] File
     - [x] Classification
     - [ ] Assessment
     - [ ] AdditionalData
