@@ -46,7 +46,7 @@ func (m *Message) Bytes(prefix, indent string) ([]byte, error) {
 }
 
 type Alert struct {
-	MessageId      string         `xml:"messageid,attr"`
+	MessageId      string         `xml:"messageid,attr,omitempty"`
 	Analyzer       Analyzer       `xml:"http://iana.org/idmef Analyzer"`
 	CreateTime     Time           `xml:"http://iana.org/idmef CreateTime"`
 	DetectTime     *Time          `xml:"http://iana.org/idmef DetectTime"`
@@ -54,6 +54,7 @@ type Alert struct {
 	Source         []Source       `xml:"http://iana.org/idmef Source"`
 	Target         []Source       `xml:"http://iana.org/idmef Target"`
 	Classification Classification `xml:"http://iana.org/idmef Classification"`
+	Assessment     *Assessment    `xml:"http://iana.org/idmef Assessment"`
 }
 
 func (a *Alert) Common() *idmef.Alert {
@@ -77,6 +78,9 @@ func (a *Alert) Common() *idmef.Alert {
 	}
 	for _, t := range a.Target {
 		cm.Target = append(cm.Target, t.Common())
+	}
+	if a.Assessment != nil {
+		cm.Assessment = a.Assessment.Common()
 	}
 	return cm
 }
@@ -143,10 +147,10 @@ func (n *Node) Common() *idmef.Node {
 }
 
 type Address struct {
-	Ident    string `xml:"ident,attr"`
-	Category string `xml:"category,attr"`
-	Address  string `xml:"http://iana.org/idmef address"`
-	Netmask  string `xml:"http://iana.org/idmef netmask"`
+	Ident    string `xml:"ident,attr,omitempty"`
+	Category string `xml:"category,attr,omitempty"`
+	Address  string `xml:"http://iana.org/idmef address,omitempty"`
+	Netmask  string `xml:"http://iana.org/idmef netmask,omitempty"`
 }
 
 func (a *Address) Common() *idmef.Address {
@@ -193,7 +197,7 @@ type Process struct {
 	Name string `xml:"http://iana.org/idmef name,omitempty"`
 	PID  int    `xml:"http://iana.org/idmef pid,omitempty"`
 	Path string `xml:"http://iana.org/idmef path,omitempty"`
-	Arg  int    `xml:"http://iana.org/idmef arg,omitempty"`
+	Arg  string `xml:"http://iana.org/idmef arg,omitempty"`
 }
 
 func (p *Process) Common() *idmef.Process {
@@ -259,4 +263,58 @@ func (ref *Reference) Common() idmef.Reference {
 		Meaning: ref.Meaning,
 		Name:    ref.Name,
 		URL:     ref.URL}
+}
+
+type Assessment struct {
+	Impact     *Impact     `xml:"http://iana.org/idmef Impact,omitempty"`
+	Action     []Action    `xml:"http://iana.org/idmef Action,omitempty"`
+	Confidence *Confidence `xml:"http://iana.org/idmef Confidence,omitempty"`
+}
+
+func (a Assessment) Common() *idmef.Assessment {
+	ca := &idmef.Assessment{
+		Action: []idmef.Action{}}
+	if a.Impact != nil {
+		ca.Impact = a.Impact.Common()
+	}
+	for _, action := range a.Action {
+		ca.Action = append(ca.Action, action.Common())
+	}
+	if a.Confidence != nil {
+		ca.Confidence = a.Confidence.Common()
+	}
+	return ca
+}
+
+type Impact struct {
+	Severity   string `xml:"severity,attr,omitempty"`
+	Completion string `xml:"completion,attr,omitempty"`
+	Type       string `xml:"type,attr,omitempty"`
+}
+
+func (i Impact) Common() *idmef.Impact {
+	return &idmef.Impact{
+		Severity:   i.Severity,
+		Completion: i.Completion,
+		Type:       i.Type}
+}
+
+type Action struct {
+	Action   string `xml:",chardata"`
+	Category string `xml:"category,attr,omitempty"`
+}
+
+func (a Action) Common() idmef.Action {
+	return idmef.Action{
+		Action:   a.Action,
+		Category: a.Category}
+}
+
+type Confidence struct {
+	Rating string `xml:"rating,attr,omitempty"`
+}
+
+func (c Confidence) Common() *idmef.Confidence {
+	return &idmef.Confidence{
+		Rating: c.Rating}
 }

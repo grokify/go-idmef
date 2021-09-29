@@ -29,7 +29,7 @@ func (m *Message) Bytes(prefix, indent string) ([]byte, error) {
 }
 
 type Alert struct {
-	MessageId      string         `xml:"messageid,attr"`
+	MessageId      string         `xml:"messageid,attr,omitempty"`
 	Analyzer       Analyzer       `xml:"idmef:Analyzer"`       // Exactly one.
 	CreateTime     Time           `xml:"idmef:CreateTime"`     // Exactly one.
 	DetectTime     *Time          `xml:"idmef:DetectTime"`     // Zero or one
@@ -37,6 +37,7 @@ type Alert struct {
 	Source         []Source       `xml:"idmef:Source"`         // Zero or more.
 	Target         []Source       `xml:"idmef:Target"`         // Zero or more.
 	Classification Classification `xml:"idmef:Classification"` // Exactly one.
+	Assessment     *Assessment    `xml:"idmef:Assessment"`
 }
 
 type Time struct {
@@ -73,15 +74,15 @@ type Node struct {
 }
 
 type Address struct {
-	Ident    string `xml:"ident,attr"`
-	Category string `xml:"category,attr"`
-	Address  string `xml:"idmef:address"`
-	Netmask  string `xml:"idmef:netmask"`
+	Ident    string `xml:"ident,attr,omitempty"`
+	Category string `xml:"category,attr,omitempty"`
+	Address  string `xml:"idmef:address,omitempty"`
+	Netmask  string `xml:"idmef:netmask,omitempty"`
 }
 
 type User struct {
-	Ident    string   `xml:"ident,attr"`
-	Category string   `xml:"category,attr"`
+	Ident    string   `xml:"ident,attr,omitempty"`
+	Category string   `xml:"category,attr,omitempty"`
 	UserId   []UserId `xml:"idmef:UserId,omitempty"`
 }
 
@@ -96,7 +97,7 @@ type Process struct {
 	Name string `xml:"idmef:name,omitempty"`
 	PID  int    `xml:"idmef:pid,omitempty"`
 	Path string `xml:"idmef:path,omitempty"`
-	Arg  int    `xml:"idmef:arg,omitempty"`
+	Arg  string `xml:"idmef:arg,omitempty"`
 }
 
 type Service struct {
@@ -120,4 +121,25 @@ type Reference struct {
 	Meaning string `xml:"meaning,attr,omitempty"`
 	Name    string `xml:"idmef:name,omitempty"`
 	URL     string `xml:"idmef:url,omitempty"`
+}
+
+type Assessment struct {
+	Impact     *Impact     `xml:"idmef:Impact,omitempty"`
+	Action     []Action    `xml:"idmef:Action,omitempty"`
+	Confidence *Confidence `xml:"idmef:Confidence,omitempty"`
+}
+
+type Impact struct {
+	Severity   string `xml:"severity,attr,omitempty"`
+	Completion string `xml:"completion,attr,omitempty"`
+	Type       string `xml:"type,attr,omitempty"`
+}
+
+type Action struct {
+	Action   string `xml:",chardata"`
+	Category string `xml:"category,attr,omitempty"`
+}
+
+type Confidence struct {
+	Rating string `xml:"rating,attr,omitempty"`
 }
