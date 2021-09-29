@@ -9,15 +9,12 @@ import (
 	"github.com/sergi/go-diff/diffmatchpatch"
 )
 
-const (
-	testFileXML = "../testdata/example_dos_pingofdeath-attack.xml"
-)
-
 // TestSampleAlert ensures parse sample correct.
 func TestSampleAlert(t *testing.T) {
-	compare(t, testFileXML, testdata.ExampleAlertPingOfDeathAttack)
+	compare(t, "../testdata/example_dos_pingofdeath-attack.xml", testdata.ExampleAlertPingOfDeathAttack)
 	compare(t, "../testdata/example_dos_teardrop-attack.xml", testdata.ExampleAlertTeardropAttack)
 	compare(t, "../testdata/example_port-scanning_connection-to-disallowed-service.xml", testdata.ExamplePortScanningDisallowedService)
+	compare(t, "../testdata/example_analyzer-assessments.xml", testdata.ExampleAlertAnalyzerAssessment)
 }
 
 func compare(t *testing.T, testFileXML string, sampleMessage func() *idmef.Message) {
