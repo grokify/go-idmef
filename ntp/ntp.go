@@ -1,6 +1,7 @@
 package ntp
 
 import (
+	"fmt"
 	"strconv"
 	"time"
 )
@@ -30,7 +31,7 @@ func NewTimestamp(t time.Time) Timestamp {
 
 func (ts Timestamp) String() string {
 	return "0x" + strconv.FormatInt(int64(ts.Seconds), 16) + ".0x" +
-		strconv.FormatInt(int64(ts.Fraction), 16)
+		fmt.Sprintf("%08s", strconv.FormatInt(int64(ts.Fraction), 16))
 }
 
 func TimeToNtp(t time.Time) string {
