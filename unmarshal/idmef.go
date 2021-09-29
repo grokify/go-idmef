@@ -52,7 +52,7 @@ type Alert struct {
 	DetectTime     *Time          `xml:"http://iana.org/idmef DetectTime"`
 	AnalyzerTime   *Time          `xml:"http://iana.org/idmef AnalyzerTime"`
 	Source         []Source       `xml:"http://iana.org/idmef Source"`
-	Target         []Source       `xml:"http://iana.org/idmef Target"`
+	Target         []Target       `xml:"http://iana.org/idmef Target"`
 	Classification Classification `xml:"http://iana.org/idmef Classification"`
 	Assessment     *Assessment    `xml:"http://iana.org/idmef Assessment"`
 }
@@ -63,7 +63,7 @@ func (a *Alert) Common() *idmef.Alert {
 		Analyzer:       a.Analyzer.Common(),
 		CreateTime:     a.CreateTime.Common(),
 		Source:         []idmef.Source{},
-		Target:         []idmef.Source{},
+		Target:         []idmef.Target{},
 		Classification: a.Classification.Common()}
 	if a.DetectTime != nil {
 		dt := a.DetectTime.Common()
@@ -85,6 +85,24 @@ func (a *Alert) Common() *idmef.Alert {
 	return cm
 }
 
+type Analyzer struct {
+	AnalyzerId string `xml:"analyzerid,attr,omitempty"`
+	OSType     string `xml:"ostype,attr,omitempty"`
+	OSVersion  string `xml:"osversion,attr,omitempty"`
+	Node       *Node  `xml:"http://iana.org/idmef Node,omitempty"`
+}
+
+func (a *Analyzer) Common() idmef.Analyzer {
+	cm := idmef.Analyzer{
+		AnalyzerId: a.AnalyzerId,
+		OSType:     a.OSType,
+		OSVersion:  a.OSVersion}
+	if a.Node != nil {
+		cm.Node = a.Node.Common()
+	}
+	return cm
+}
+
 type Time struct {
 	Time     time.Time `xml:",chardata"`
 	NtpStamp string    `xml:"ntpstamp,attr"`
@@ -99,7 +117,6 @@ func (t *Time) Common() idmef.Time {
 type Source struct {
 	Ident   string   `xml:"ident,attr"`
 	Spoofed string   `xml:"spoofed,attr,omitempty"` // Source
-	Decoy   string   `xml:"decoy,attr,omitempty"`   // Target
 	Node    *Node    `xml:"http://iana.org/idmef Node"`
 	User    *User    `xml:"http://iana.org/idmef User"`
 	Process *Process `xml:"http://iana.org/idmef Process"`
@@ -109,8 +126,7 @@ type Source struct {
 func (s *Source) Common() idmef.Source {
 	cm := idmef.Source{
 		Ident:   s.Ident,
-		Spoofed: s.Spoofed,
-		Decoy:   s.Decoy}
+		Spoofed: s.Spoofed}
 	if s.Node != nil {
 		cm.Node = s.Node.Common()
 	}
@@ -122,6 +138,38 @@ func (s *Source) Common() idmef.Source {
 	}
 	if s.Service != nil {
 		cm.Service = s.Service.Common()
+	}
+	return cm
+}
+
+type Target struct {
+	Ident   string   `xml:"ident,attr"`
+	Decoy   string   `xml:"decoy,attr,omitempty"` // Target
+	Node    *Node    `xml:"http://iana.org/idmef Node"`
+	User    *User    `xml:"http://iana.org/idmef User"`
+	Process *Process `xml:"http://iana.org/idmef Process"`
+	Service *Service `xml:"http://iana.org/idmef Service"`
+	File    *File    `xml:"http://iana.org/idmef File,omitempty"`
+}
+
+func (t *Target) Common() idmef.Target {
+	cm := idmef.Target{
+		Ident: t.Ident,
+		Decoy: t.Decoy}
+	if t.Node != nil {
+		cm.Node = t.Node.Common()
+	}
+	if t.User != nil {
+		cm.User = t.User.Common()
+	}
+	if t.Process != nil {
+		cm.Process = t.Process.Common()
+	}
+	if t.Service != nil {
+		cm.Service = t.Service.Common()
+	}
+	if t.File != nil {
+		cm.File = t.File.Common()
 	}
 	return cm
 }
@@ -221,18 +269,69 @@ func (s *Service) Common() *idmef.Service {
 		Port:  s.Port}
 }
 
-type Analyzer struct {
-	AnalyzerId string `xml:"analyzerid,attr,omitempty"`
-	Node       *Node  `xml:"http://iana.org/idmef Node,omitempty"`
+type File struct {
+	Category   string       `xml:"category,attr,omitempty"`
+	FSType     string       `xml:"fstype,attr,omitempty"`
+	Name       string       `xml:"http://iana.org/idmef name,omitempty"`
+	Path       string       `xml:"http://iana.org/idmef path,omitempty"`
+	FileAccess []FileAccess `xml:"http://iana.org/idmef FileAccess,omitempty"`
+	Linkage    *Linkage     `xml:"http://iana.org/idmef Linkage,omitempty"`
 }
 
-func (a *Analyzer) Common() idmef.Analyzer {
-	cm := idmef.Analyzer{
-		AnalyzerId: a.AnalyzerId}
-	if a.Node != nil {
-		cm.Node = a.Node.Common()
+func (f *File) Common() *idmef.File {
+	cf := &idmef.File{
+		Category:   f.Category,
+		FSType:     f.FSType,
+		Name:       f.Name,
+		Path:       f.Path,
+		FileAccess: []idmef.FileAccess{}}
+	for _, fa := range f.FileAccess {
+		cf.FileAccess = append(cf.FileAccess, fa.Common())
 	}
-	return cm
+	if f.Linkage != nil {
+		cf.Linkage = f.Linkage.Common()
+	}
+	return cf
+}
+
+type FileAccess struct {
+	UserId     *UserId      `xml:"http://iana.org/idmef UserId,omitempty"`
+	Permission []Permission `xml:"http://iana.org/idmef permission,omitempty"`
+}
+
+func (f FileAccess) Common() idmef.FileAccess {
+	cf := idmef.FileAccess{
+		Permission: []idmef.Permission{}}
+	if f.UserId != nil {
+		cu := f.UserId.Common()
+		cf.UserId = &cu
+	}
+	for _, p := range f.Permission {
+		cf.Permission = append(cf.Permission, p.Common())
+	}
+	return cf
+}
+
+type Permission struct {
+	Perms string `xml:"perms,attr,omitempty"`
+}
+
+func (p Permission) Common() idmef.Permission {
+	return idmef.Permission{
+		Perms: p.Perms}
+}
+
+type Linkage struct {
+	Category string `xml:"category,attr,omitempty"`
+	Name     string `xml:"http://iana.org/idmef name,omitempty"`
+	Path     string `xml:"http://iana.org/idmef path,omitempty"`
+}
+
+func (l *Linkage) Common() *idmef.Linkage {
+	return &idmef.Linkage{
+		Category: l.Category,
+		Name:     l.Name,
+		Path:     l.Path}
 }
 
 type Classification struct {

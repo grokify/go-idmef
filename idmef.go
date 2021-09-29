@@ -35,9 +35,16 @@ type Alert struct {
 	DetectTime     *Time          `xml:"idmef:DetectTime"`     // Zero or one
 	AnalyzerTime   *Time          `xml:"idmef:AnalyzerTime"`   // Zero or one.
 	Source         []Source       `xml:"idmef:Source"`         // Zero or more.
-	Target         []Source       `xml:"idmef:Target"`         // Zero or more.
+	Target         []Target       `xml:"idmef:Target"`         // Zero or more.
 	Classification Classification `xml:"idmef:Classification"` // Exactly one.
 	Assessment     *Assessment    `xml:"idmef:Assessment"`
+}
+
+type Analyzer struct {
+	AnalyzerId string `xml:"analyzerid,attr"`
+	OSType     string `xml:"ostype,attr,omitempty"`
+	OSVersion  string `xml:"osversion,attr,omitempty"`
+	Node       *Node  `xml:"idmef:Node"`
 }
 
 type Time struct {
@@ -58,11 +65,20 @@ func (t *Time) InflateNtpStamp() {
 type Source struct {
 	Ident   string   `xml:"ident,attr,omitempty"`
 	Spoofed string   `xml:"spoofed,attr,omitempty"` // Source
-	Decoy   string   `xml:"decoy,attr,omitempty"`   // Target
 	Node    *Node    `xml:"idmef:Node,omitempty"`
 	User    *User    `xml:"idmef:User,omitempty"`
 	Process *Process `xml:"idmef:Process,omitempty"`
 	Service *Service `xml:"idmef:Service,omitempty"`
+}
+
+type Target struct {
+	Ident   string   `xml:"ident,attr,omitempty"`
+	Decoy   string   `xml:"decoy,attr,omitempty"` // Target
+	Node    *Node    `xml:"idmef:Node,omitempty"`
+	User    *User    `xml:"idmef:User,omitempty"`
+	Process *Process `xml:"idmef:Process,omitempty"`
+	Service *Service `xml:"idmef:Service,omitempty"`
+	File    *File    `xml:"idmef:File,omitempty"`
 }
 
 type Node struct {
@@ -106,10 +122,45 @@ type Service struct {
 	Port  int    `xml:"idmef:port,omitempty"`
 }
 
-type Analyzer struct {
-	AnalyzerId string `xml:"analyzerid,attr"`
-	Node       *Node  `xml:"idmef:Node"`
+type File struct {
+	Category   string       `xml:"category,attr,omitempty"`
+	FSType     string       `xml:"fstype,attr,omitempty"`
+	Name       string       `xml:"idmef:name,omitempty"`
+	Path       string       `xml:"idmef:path,omitempty"`
+	FileAccess []FileAccess `xml:"idmef:FileAccess,omitempty"`
+	Linkage    *Linkage     `xml:"idmef:Linkage,omitempty"`
 }
+
+type FileAccess struct {
+	UserId     *UserId      `xml:"idmef:UserId,omitempty"`
+	Permission []Permission `xml:"idmef:permission,omitempty"`
+}
+
+type Permission struct {
+	Perms string `xml:"perms,attr,omitempty"`
+}
+
+type Linkage struct {
+	Category string `xml:"category,attr,omitempty"`
+	Name     string `xml:"idmef:name,omitempty"`
+	Path     string `xml:"idmef:path,omitempty"`
+}
+
+/*
+<idmef:File category="current" fstype="tmpfs">
+<idmef:name>xxx000238483</idmef:name>
+<idmef:path>/tmp/xxx000238483</idmef:path>
+<idmef:FileAccess>
+	<idmef:UserId type="user-privs">
+		<idmef:name>alice</idmef:name>
+		<idmef:number>777</idmef:number>
+	</idmef:UserId>
+	<idmef:permission perms="read" />
+	<idmef:permission perms="write" />
+	<idmef:permission perms="delete" />
+	<idmef:permission perms="changePermissions" />
+</idmef:FileAccess>
+*/
 
 type Classification struct {
 	Text      string      `xml:"text,attr"`
