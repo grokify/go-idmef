@@ -93,11 +93,6 @@ func ExamplePortScanningDisallowedService() *idmef.Message {
 	return msg
 }
 
-/*
-
-
- */
-
 func ExamplePortScanningDisallowedServiceString() string {
 	return `<?xml version="1.0" encoding="UTF-8"?>
 <idmef:IDMEF-Message version="1.0"
