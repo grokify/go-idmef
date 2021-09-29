@@ -6,9 +6,9 @@ import (
 	"github.com/grokify/go-idmef"
 )
 
-// SampleAlert provides the sample file from
+// ExampleAlertPingOfDeathAttack provides the sample file from
 // https://en.wikipedia.org/wiki/Intrusion_Detection_Message_Exchange_Format
-func SampleAlert() *idmef.Message {
+func ExampleAlertPingOfDeathAttack() *idmef.Message {
 	dt, err := time.Parse(time.RFC3339, "2000-03-09T10:01:25.93464Z")
 	if err != nil {
 		panic(err)
@@ -28,12 +28,12 @@ func SampleAlert() *idmef.Message {
 			CreateTime: idmef.NewTime(dt),
 			Source: []idmef.Source{
 				{
-					Indent:  "a1a2",
+					Ident:   "a1a2",
 					Spoofed: "yes",
 					Node: &idmef.Node{
-						Indent: "a1a2-1",
+						Ident: "a1a2-1",
 						Address: &idmef.Address{
-							Indent:   "a1a2-2",
+							Ident:    "a1a2-2",
 							Category: "ipv4-addr",
 							Address:  "192.0.2.200",
 						},
@@ -42,27 +42,27 @@ func SampleAlert() *idmef.Message {
 			},
 			Target: []idmef.Source{
 				{
-					Indent: "b3b4",
+					Ident: "b3b4",
 					Node: &idmef.Node{
 						Address: &idmef.Address{
-							Indent:   "b3b4-1",
+							Ident:    "b3b4-1",
 							Category: "ipv4-addr",
 							Address:  "192.0.2.50",
 						},
 					},
 				},
 				{
-					Indent: "c5c6",
+					Ident: "c5c6",
 					Node: &idmef.Node{
-						Indent:   "c5c6-1",
+						Ident:    "c5c6-1",
 						Category: "nisplus",
 						Name:     "lollipop",
 					},
 				},
 				{
-					Indent: "d7d8",
+					Ident: "d7d8",
 					Node: &idmef.Node{
-						Indent:   "d7d8-1",
+						Ident:    "d7d8-1",
 						Location: "Cabinet B10",
 						Name:     "Cisco.router.b10",
 					},
@@ -70,11 +70,11 @@ func SampleAlert() *idmef.Message {
 			},
 			Classification: idmef.Classification{
 				Text: "Ping-of-death detected",
-				Reference: &idmef.Reference{
+				Reference: []idmef.Reference{{
 					Origin: "cve",
 					Name:   "CVE-1999-128",
 					URL:    "http://www.cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-1999-128",
-				},
+				}},
 			},
 		},
 	}
