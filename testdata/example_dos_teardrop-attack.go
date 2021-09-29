@@ -43,7 +43,7 @@ func ExampleAlertTeardropAttack() *idmef.Message {
 					},
 				},
 			},
-			Target: []idmef.Source{
+			Target: []idmef.Target{
 				{
 					Ident: "d1c2b3a4",
 					Node: &idmef.Node{

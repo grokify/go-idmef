@@ -40,7 +40,7 @@ func ExampleAlertPingOfDeathAttack() *idmef.Message {
 					},
 				},
 			},
-			Target: []idmef.Source{
+			Target: []idmef.Target{
 				{
 					Ident: "b3b4",
 					Node: &idmef.Node{

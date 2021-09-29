@@ -12,9 +12,7 @@
 				</idmef:Address>
 			</idmef:Node>
 		</idmef:Analyzer>
-		<idmef:CreateTime ntpstamp="0xbc71e980.0x00000000">
-         2000-03-09T08:12:32-01:00
-       </idmef:CreateTime>
+		<idmef:CreateTime ntpstamp="0xbc71e980.0x00000000">2000-03-09T08:12:32-01:00</idmef:CreateTime>
 		<idmef:Source spoofed="no">
 			<idmef:Node>
 				<idmef:location>console</idmef:location>
@@ -79,8 +77,7 @@
 		<idmef:Classification text="DOM race condition">
 			<idmef:Reference origin="vendor-specific">
 				<idmef:name>DOM race condition</idmef:name>
-				<idmef:url>file://attack-info/race.html
-           </idmef:url>
+				<idmef:url>file://attack-info/race.html</idmef:url>
 			</idmef:Reference>
 		</idmef:Classification>
 	</idmef:Alert>

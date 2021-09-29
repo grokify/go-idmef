@@ -33,7 +33,7 @@ func ExampleAlertAnalyzerAssessment() *idmef.Message {
 					},
 				},
 			},
-			Target: []idmef.Source{
+			Target: []idmef.Target{
 				{
 					Decoy: "no",
 					Node: &idmef.Node{

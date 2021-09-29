@@ -52,7 +52,7 @@ func ExamplePortScanningDisallowedService() *idmef.Message {
 					},
 				},
 			},
-			Target: []idmef.Source{
+			Target: []idmef.Target{
 				{
 					Ident: "z456",
 					Node: &idmef.Node{
