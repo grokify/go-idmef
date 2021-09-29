@@ -56,9 +56,11 @@ func (t *Time) InflateNtpStamp() {
 
 type Source struct {
 	Ident   string   `xml:"ident,attr,omitempty"`
-	Spoofed string   `xml:"spoofed,attr,omitempty"`
+	Spoofed string   `xml:"spoofed,attr,omitempty"` // Source
+	Decoy   string   `xml:"decoy,attr,omitempty"`   // Target
 	Node    *Node    `xml:"idmef:Node,omitempty"`
 	User    *User    `xml:"idmef:User,omitempty"`
+	Process *Process `xml:"idmef:Process,omitempty"`
 	Service *Service `xml:"idmef:Service,omitempty"`
 }
 
@@ -78,15 +80,23 @@ type Address struct {
 }
 
 type User struct {
-	Ident    string  `xml:"ident,attr"`
-	Category string  `xml:"category,attr"`
-	UserId   *UserId `xml:"idmef:UserId,omitempty"`
+	Ident    string   `xml:"ident,attr"`
+	Category string   `xml:"category,attr"`
+	UserId   []UserId `xml:"idmef:UserId,omitempty"`
 }
 
 type UserId struct {
-	Ident string `xml:"ident,attr,omitempty"`
-	Type  string `xml:"type,attr,omitempty"`
-	Name  string `xml:"idmef:name,omitempty"`
+	Ident  string `xml:"ident,attr,omitempty"`
+	Type   string `xml:"type,attr,omitempty"`
+	Name   string `xml:"idmef:name,omitempty"`
+	Number string `xml:"idmef:number,omitempty"`
+}
+
+type Process struct {
+	Name string `xml:"idmef:name,omitempty"`
+	PID  int    `xml:"idmef:pid,omitempty"`
+	Path string `xml:"idmef:path,omitempty"`
+	Arg  int    `xml:"idmef:arg,omitempty"`
 }
 
 type Service struct {

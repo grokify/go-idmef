@@ -40,11 +40,11 @@ func ExamplePortScanningDisallowedService() *idmef.Message {
 					User: &idmef.User{
 						Ident:    "q987-03",
 						Category: "os-device",
-						UserId: &idmef.UserId{
+						UserId: []idmef.UserId{{
 							Ident: "q987-04",
 							Type:  "target-user",
 							Name:  "badguy",
-						},
+						}},
 					},
 					Service: &idmef.Service{
 						Ident: "a123-03",

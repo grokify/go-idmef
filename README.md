@@ -47,12 +47,12 @@ See [`unmarshal.ReadFile()`](https://pkg.go.dev/github.com/grokify/go-idmef/unma
     - [x] Source
       - [x] Node
       - [x] User
-      - [ ] Process
+      - [x] Process
       - [x] Service
     - [x] Target
       - [x] Node
       - [x] User
-      - [ ] Process
+      - [x] Process
       - [x] Service
       - [ ] File
     - [x] Classification
@@ -71,6 +71,8 @@ See [`unmarshal.ReadFile()`](https://pkg.go.dev/github.com/grokify/go-idmef/unma
 - [ ] Port Scanning Attacks
   - [x] [Connection to a Disallowed Service](testdata/example_port-scanning_connection-to-disallowed-service.go) ([xml](testdata/example_port-scanning_connection-to-disallowed-service.xml))
   - [ ] Simple Port Scanning
+- [ ] Correlated Alerts
+- [ ] Analyzer Assessments
 
 ## Notes
 

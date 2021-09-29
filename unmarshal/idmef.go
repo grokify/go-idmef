@@ -94,21 +94,27 @@ func (t *Time) Common() idmef.Time {
 
 type Source struct {
 	Ident   string   `xml:"ident,attr"`
-	Spoofed string   `xml:"spoofed,attr,omitempty"`
+	Spoofed string   `xml:"spoofed,attr,omitempty"` // Source
+	Decoy   string   `xml:"decoy,attr,omitempty"`   // Target
 	Node    *Node    `xml:"http://iana.org/idmef Node"`
 	User    *User    `xml:"http://iana.org/idmef User"`
+	Process *Process `xml:"http://iana.org/idmef Process"`
 	Service *Service `xml:"http://iana.org/idmef Service"`
 }
 
 func (s *Source) Common() idmef.Source {
 	cm := idmef.Source{
 		Ident:   s.Ident,
-		Spoofed: s.Spoofed}
+		Spoofed: s.Spoofed,
+		Decoy:   s.Decoy}
 	if s.Node != nil {
 		cm.Node = s.Node.Common()
 	}
 	if s.User != nil {
 		cm.User = s.User.Common()
+	}
+	if s.Process != nil {
+		cm.Process = s.Process.Common()
 	}
 	if s.Service != nil {
 		cm.Service = s.Service.Common()
@@ -152,32 +158,50 @@ func (a *Address) Common() *idmef.Address {
 }
 
 type User struct {
-	Ident    string  `xml:"ident,attr,omitempty"`
-	Category string  `xml:"category,attr,omitempty"`
-	UserId   *UserId `xml:"http://iana.org/idmef UserId,omitempty"`
+	Ident    string   `xml:"ident,attr,omitempty"`
+	Category string   `xml:"category,attr,omitempty"`
+	UserId   []UserId `xml:"http://iana.org/idmef UserId,omitempty"`
 }
 
 func (u *User) Common() *idmef.User {
 	uc := &idmef.User{
 		Ident:    u.Ident,
-		Category: u.Category}
-	if u.UserId != nil {
-		uc.UserId = u.UserId.Common()
+		Category: u.Category,
+		UserId:   []idmef.UserId{}}
+	for _, usrId := range u.UserId {
+		uc.UserId = append(uc.UserId, usrId.Common())
 	}
 	return uc
 }
 
 type UserId struct {
-	Ident string `xml:"ident,attr,omitempty"`
-	Type  string `xml:"type,attr,omitempty"`
-	Name  string `xml:"http://iana.org/idmef name,omitempty"`
+	Ident  string `xml:"ident,attr,omitempty"`
+	Type   string `xml:"type,attr,omitempty"`
+	Name   string `xml:"http://iana.org/idmef name,omitempty"`
+	Number string `xml:"http://iana.org/idmef number,omitempty"`
 }
 
-func (u *UserId) Common() *idmef.UserId {
-	return &idmef.UserId{
-		Ident: u.Ident,
-		Type:  u.Type,
-		Name:  u.Name}
+func (u *UserId) Common() idmef.UserId {
+	return idmef.UserId{
+		Ident:  u.Ident,
+		Type:   u.Type,
+		Name:   u.Name,
+		Number: u.Number}
+}
+
+type Process struct {
+	Name string `xml:"http://iana.org/idmef name,omitempty"`
+	PID  int    `xml:"http://iana.org/idmef pid,omitempty"`
+	Path string `xml:"http://iana.org/idmef path,omitempty"`
+	Arg  int    `xml:"http://iana.org/idmef arg,omitempty"`
+}
+
+func (p *Process) Common() *idmef.Process {
+	return &idmef.Process{
+		Name: p.Name,
+		PID:  p.PID,
+		Path: p.Path,
+		Arg:  p.Arg}
 }
 
 type Service struct {
