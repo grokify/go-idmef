@@ -55,13 +55,15 @@ func (t *Time) InflateNtpStamp() {
 }
 
 type Source struct {
-	Indent  string `xml:"ident,attr,omitempty"`
-	Spoofed string `xml:"spoofed,attr,omitempty"`
-	Node    *Node  `xml:"idmef:Node"`
+	Ident   string   `xml:"ident,attr,omitempty"`
+	Spoofed string   `xml:"spoofed,attr,omitempty"`
+	Node    *Node    `xml:"idmef:Node,omitempty"`
+	User    *User    `xml:"idmef:User,omitempty"`
+	Service *Service `xml:"idmef:Service,omitempty"`
 }
 
 type Node struct {
-	Indent   string   `xml:"ident,attr,omitempty"`
+	Ident    string   `xml:"ident,attr,omitempty"`
 	Category string   `xml:"category,attr,omitempty"`
 	Address  *Address `xml:"idmef:Address,omitempty"`
 	Location string   `xml:"idmef:location,omitempty"`
@@ -69,10 +71,28 @@ type Node struct {
 }
 
 type Address struct {
-	Indent   string `xml:"ident,attr"`
+	Ident    string `xml:"ident,attr"`
 	Category string `xml:"category,attr"`
 	Address  string `xml:"idmef:address"`
 	Netmask  string `xml:"idmef:netmask"`
+}
+
+type User struct {
+	Ident    string  `xml:"ident,attr"`
+	Category string  `xml:"category,attr"`
+	UserId   *UserId `xml:"idmef:UserId,omitempty"`
+}
+
+type UserId struct {
+	Ident string `xml:"ident,attr,omitempty"`
+	Type  string `xml:"type,attr,omitempty"`
+	Name  string `xml:"idmef:name,omitempty"`
+}
+
+type Service struct {
+	Ident string `xml:"ident,attr,omitempty"`
+	Name  string `xml:"idmef:name,omitempty"`
+	Port  int    `xml:"idmef:port,omitempty"`
 }
 
 type Analyzer struct {
@@ -81,12 +101,13 @@ type Analyzer struct {
 }
 
 type Classification struct {
-	Text      string     `xml:"text,attr"`
-	Reference *Reference `xml:"idmef:Reference"`
+	Text      string      `xml:"text,attr"`
+	Reference []Reference `xml:"idmef:Reference,omitempty"`
 }
 
 type Reference struct {
-	Origin string `xml:"origin,attr"`
-	Name   string `xml:"idmef:name"`
-	URL    string `xml:"idmef:url"`
+	Origin  string `xml:"origin,attr,omitempty"`
+	Meaning string `xml:"meaning,attr,omitempty"`
+	Name    string `xml:"idmef:name,omitempty"`
+	URL     string `xml:"idmef:url,omitempty"`
 }

@@ -93,32 +93,40 @@ func (t *Time) Common() idmef.Time {
 }
 
 type Source struct {
-	Indent  string `xml:"ident,attr"`
-	Spoofed string `xml:"spoofed,attr,omitempty"`
-	Node    *Node  `xml:"http://iana.org/idmef Node"`
+	Ident   string   `xml:"ident,attr"`
+	Spoofed string   `xml:"spoofed,attr,omitempty"`
+	Node    *Node    `xml:"http://iana.org/idmef Node"`
+	User    *User    `xml:"http://iana.org/idmef User"`
+	Service *Service `xml:"http://iana.org/idmef Service"`
 }
 
 func (s *Source) Common() idmef.Source {
 	cm := idmef.Source{
-		Indent:  s.Indent,
+		Ident:   s.Ident,
 		Spoofed: s.Spoofed}
 	if s.Node != nil {
 		cm.Node = s.Node.Common()
+	}
+	if s.User != nil {
+		cm.User = s.User.Common()
+	}
+	if s.Service != nil {
+		cm.Service = s.Service.Common()
 	}
 	return cm
 }
 
 type Node struct {
-	Indent   string   `xml:"ident,attr,omitempty"`
+	Ident    string   `xml:"ident,attr,omitempty"`
 	Category string   `xml:"category,attr,omitempty"`
+	Name     string   `xml:"http://iana.org/idmef name,omitempty"`
 	Address  *Address `xml:"http://iana.org/idmef Address,omitempty"`
 	Location string   `xml:"http://iana.org/idmef location,omitempty"`
-	Name     string   `xml:"http://iana.org/idmef name,omitempty"`
 }
 
 func (n *Node) Common() *idmef.Node {
 	cm := &idmef.Node{
-		Indent:   n.Indent,
+		Ident:    n.Ident,
 		Category: n.Category,
 		Location: n.Location,
 		Name:     n.Name}
@@ -129,7 +137,7 @@ func (n *Node) Common() *idmef.Node {
 }
 
 type Address struct {
-	Indent   string `xml:"ident,attr"`
+	Ident    string `xml:"ident,attr"`
 	Category string `xml:"category,attr"`
 	Address  string `xml:"http://iana.org/idmef address"`
 	Netmask  string `xml:"http://iana.org/idmef netmask"`
@@ -137,15 +145,57 @@ type Address struct {
 
 func (a *Address) Common() *idmef.Address {
 	return &idmef.Address{
-		Indent:   a.Indent,
+		Ident:    a.Ident,
 		Category: a.Category,
 		Address:  a.Address,
 		Netmask:  a.Netmask}
 }
 
+type User struct {
+	Ident    string  `xml:"ident,attr,omitempty"`
+	Category string  `xml:"category,attr,omitempty"`
+	UserId   *UserId `xml:"http://iana.org/idmef UserId,omitempty"`
+}
+
+func (u *User) Common() *idmef.User {
+	uc := &idmef.User{
+		Ident:    u.Ident,
+		Category: u.Category}
+	if u.UserId != nil {
+		uc.UserId = u.UserId.Common()
+	}
+	return uc
+}
+
+type UserId struct {
+	Ident string `xml:"ident,attr,omitempty"`
+	Type  string `xml:"type,attr,omitempty"`
+	Name  string `xml:"http://iana.org/idmef name,omitempty"`
+}
+
+func (u *UserId) Common() *idmef.UserId {
+	return &idmef.UserId{
+		Ident: u.Ident,
+		Type:  u.Type,
+		Name:  u.Name}
+}
+
+type Service struct {
+	Ident string `xml:"ident,attr,omitempty"`
+	Name  string `xml:"http://iana.org/idmef name,omitempty"`
+	Port  int    `xml:"http://iana.org/idmef port,omitempty"`
+}
+
+func (s *Service) Common() *idmef.Service {
+	return &idmef.Service{
+		Ident: s.Ident,
+		Name:  s.Name,
+		Port:  s.Port}
+}
+
 type Analyzer struct {
-	AnalyzerId string `xml:"analyzerid,attr"`
-	Node       *Node  `xml:"http://iana.org/idmef Node"`
+	AnalyzerId string `xml:"analyzerid,attr,omitempty"`
+	Node       *Node  `xml:"http://iana.org/idmef Node,omitempty"`
 }
 
 func (a *Analyzer) Common() idmef.Analyzer {
@@ -158,28 +208,31 @@ func (a *Analyzer) Common() idmef.Analyzer {
 }
 
 type Classification struct {
-	Text      string     `xml:"text,attr"`
-	Reference *Reference `xml:"http://iana.org/idmef Reference"`
+	Text      string      `xml:"text,attr"`
+	Reference []Reference `xml:"http://iana.org/idmef Reference"`
 }
 
 func (cl *Classification) Common() idmef.Classification {
 	cm := idmef.Classification{
-		Text: cl.Text}
-	if cl.Reference != nil {
-		cm.Reference = cl.Reference.Common()
+		Text:      cl.Text,
+		Reference: []idmef.Reference{}}
+	for _, ref := range cl.Reference {
+		cm.Reference = append(cm.Reference, ref.Common())
 	}
 	return cm
 }
 
 type Reference struct {
-	Origin string `xml:"origin,attr"`
-	Name   string `xml:"http://iana.org/idmef name"`
-	URL    string `xml:"http://iana.org/idmef url"`
+	Origin  string `xml:"origin,attr,omitempty"`
+	Meaning string `xml:"meaning,attr,omitempty"`
+	Name    string `xml:"http://iana.org/idmef name,omitempty"`
+	URL     string `xml:"http://iana.org/idmef url,omitempty"`
 }
 
-func (ref *Reference) Common() *idmef.Reference {
-	return &idmef.Reference{
-		Origin: ref.Origin,
-		Name:   ref.Name,
-		URL:    ref.URL}
+func (ref *Reference) Common() idmef.Reference {
+	return idmef.Reference{
+		Origin:  ref.Origin,
+		Meaning: ref.Meaning,
+		Name:    ref.Name,
+		URL:     ref.URL}
 }
