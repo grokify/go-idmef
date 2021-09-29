@@ -71,8 +71,14 @@ See [`unmarshal.ReadFile()`](https://pkg.go.dev/github.com/grokify/go-idmef/unma
 - [ ] Port Scanning Attacks
   - [x] [Connection to a Disallowed Service](testdata/example_port-scanning_connection-to-disallowed-service.go) ([xml](testdata/example_port-scanning_connection-to-disallowed-service.xml))
   - [ ] Simple Port Scanning
+- [ ] Local Attacks
+  - [ ] The "loadmodule" Attack
+  - [ ] The "phf" Attack
+  - [ ] File Modification ([xml](testdata/example_local-attacks_file-modification.xml))
+- [ ] System Policy Violation
 - [ ] Correlated Alerts
 - [x] [Analyzer Assessments](testdata/example_analyzer-assessments.go) ([xml](testdata/example_analyzer-assessments.xml))
+- [ ] Heartbeat
 
 ## Notes
 
