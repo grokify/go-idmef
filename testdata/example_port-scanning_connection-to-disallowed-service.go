@@ -33,13 +33,13 @@ func ExamplePortScanningDisallowedService() *idmef.Message {
 						Ident: "a123-01",
 						Address: &idmef.Address{
 							Ident:    "a123-02",
-							Category: "ipv4-addr",
+							Category: idmef.CategoryAddressIPV4,
 							Address:  "192.0.2.200",
 						},
 					},
 					User: &idmef.User{
 						Ident:    "q987-03",
-						Category: "os-device",
+						Category: idmef.CategoryOSDevice,
 						UserId: []idmef.UserId{{
 							Ident: "q987-04",
 							Type:  "target-user",
@@ -57,11 +57,11 @@ func ExamplePortScanningDisallowedService() *idmef.Message {
 					Ident: "z456",
 					Node: &idmef.Node{
 						Ident:    "z456-01",
-						Category: "nis",
+						Category: idmef.CategoryNIS,
 						Name:     "myhost",
 						Address: &idmef.Address{
 							Ident:    "z456-02",
-							Category: "ipv4-addr",
+							Category: idmef.CategoryAddressIPV4,
 							Address:  "192.0.2.50",
 						},
 					},
@@ -77,7 +77,7 @@ func ExamplePortScanningDisallowedService() *idmef.Message {
 				Reference: []idmef.Reference{
 					{
 						Origin: "vendor-specific",
-						Name:   "finger",
+						Name:   idmef.ServiceFinger,
 						URL:    "http://www.vendor.com/finger",
 					},
 					{
