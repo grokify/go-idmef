@@ -27,7 +27,7 @@ func ExampleAlertAnalyzerAssessment() *idmef.Message {
 					Node: &idmef.Node{
 						Location: idmef.LocationConsole,
 						Address: &idmef.Address{
-							Category: idmef.CategoryAddressIPV4,
+							Category: idmef.IPV4Addr,
 							Address:  "192.0.2.1",
 						},
 					},
@@ -39,7 +39,7 @@ func ExampleAlertAnalyzerAssessment() *idmef.Message {
 					Node: &idmef.Node{
 						Location: idmef.LocationLocal,
 						Address: &idmef.Address{
-							Category: idmef.CategoryAddressIPV4,
+							Category: idmef.IPV4Addr,
 							Address:  "192.0.2.1",
 						},
 					},
@@ -47,16 +47,16 @@ func ExampleAlertAnalyzerAssessment() *idmef.Message {
 						Category: idmef.CategoryOSDevice,
 						UserId: []idmef.UserId{
 							{
-								Type:   "original-user",
+								Type:   idmef.UserIdTypeOriginalUser,
 								Number: "456",
 							},
 							{
-								Type:   "current-user",
+								Type:   idmef.UserIdTypeCurrentUser,
 								Name:   "root",
 								Number: "0",
 							},
 							{
-								Type:   "user-privs",
+								Type:   idmef.UserIdTypeUserPrivs,
 								Number: "0",
 							},
 						},

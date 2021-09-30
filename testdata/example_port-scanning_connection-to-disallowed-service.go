@@ -21,7 +21,7 @@ func ExamplePortScanningDisallowedService() *idmef.Message {
 			Analyzer: idmef.Analyzer{
 				AnalyzerId: "bc-sensor01",
 				Node: &idmef.Node{
-					Category: "dns",
+					Category: idmef.ServiceDNS,
 					Name:     "sensor.example.com",
 				},
 			},
@@ -33,7 +33,7 @@ func ExamplePortScanningDisallowedService() *idmef.Message {
 						Ident: "a123-01",
 						Address: &idmef.Address{
 							Ident:    "a123-02",
-							Category: idmef.CategoryAddressIPV4,
+							Category: idmef.IPV4Addr,
 							Address:  "192.0.2.200",
 						},
 					},
@@ -57,17 +57,17 @@ func ExamplePortScanningDisallowedService() *idmef.Message {
 					Ident: "z456",
 					Node: &idmef.Node{
 						Ident:    "z456-01",
-						Category: idmef.CategoryNIS,
+						Category: idmef.ServiceNIS,
 						Name:     "myhost",
 						Address: &idmef.Address{
 							Ident:    "z456-02",
-							Category: idmef.CategoryAddressIPV4,
+							Category: idmef.IPV4Addr,
 							Address:  "192.0.2.50",
 						},
 					},
 					Service: &idmef.Service{
 						Ident: "z456-03",
-						Name:  "finger",
+						Name:  idmef.ServiceFinger,
 						Port:  79,
 					},
 				},
@@ -76,12 +76,12 @@ func ExamplePortScanningDisallowedService() *idmef.Message {
 				Text: "Portscan",
 				Reference: []idmef.Reference{
 					{
-						Origin: "vendor-specific",
+						Origin: idmef.OriginVendorSpecific,
 						Name:   idmef.ServiceFinger,
 						URL:    "http://www.vendor.com/finger",
 					},
 					{
-						Origin:  "vendor-specific",
+						Origin:  idmef.OriginVendorSpecific,
 						Meaning: "general documentation",
 						Name:    "Distributed attack",
 						URL:     "http://www.vendor.com/distributed",

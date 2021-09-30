@@ -21,7 +21,7 @@ func ExampleAlertPingOfDeathAttack() *idmef.Message {
 			Analyzer: idmef.Analyzer{
 				AnalyzerId: "bc-sensor01",
 				Node: &idmef.Node{
-					Category: "dns",
+					Category: idmef.ServiceDNS,
 					Name:     "sensor.example.com",
 				},
 			},
@@ -34,7 +34,7 @@ func ExampleAlertPingOfDeathAttack() *idmef.Message {
 						Ident: "a1a2-1",
 						Address: &idmef.Address{
 							Ident:    "a1a2-2",
-							Category: "ipv4-addr",
+							Category: idmef.IPV4Addr,
 							Address:  "192.0.2.200",
 						},
 					},
@@ -46,7 +46,7 @@ func ExampleAlertPingOfDeathAttack() *idmef.Message {
 					Node: &idmef.Node{
 						Address: &idmef.Address{
 							Ident:    "b3b4-1",
-							Category: "ipv4-addr",
+							Category: idmef.IPV4Addr,
 							Address:  "192.0.2.50",
 						},
 					},
@@ -55,7 +55,7 @@ func ExampleAlertPingOfDeathAttack() *idmef.Message {
 					Ident: "c5c6",
 					Node: &idmef.Node{
 						Ident:    "c5c6-1",
-						Category: "nisplus",
+						Category: idmef.ServiceNISPlus,
 						Name:     "lollipop",
 					},
 				},

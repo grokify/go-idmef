@@ -21,7 +21,7 @@ func ExampleAlertTeardropAttack() *idmef.Message {
 			Analyzer: idmef.Analyzer{
 				AnalyzerId: "hq-dmz-analyzer01",
 				Node: &idmef.Node{
-					Category: "dns",
+					Category: idmef.ServiceDNS,
 					Location: "Headquarters DMZ Network",
 					Name:     "analyzer01.example.com",
 				},
@@ -32,11 +32,11 @@ func ExampleAlertTeardropAttack() *idmef.Message {
 					Ident: "a1b2c3d4",
 					Node: &idmef.Node{
 						Ident:    "a1b2c3d4-001",
-						Category: "dns",
+						Category: idmef.ServiceDNS,
 						Name:     "badguy.example.net",
 						Address: &idmef.Address{
 							Ident:    "a1b2c3d4-002",
-							Category: "ipv4-net-mask",
+							Category: idmef.IPV4NetMask,
 							Address:  "192.0.2.50",
 							Netmask:  "255.255.255.255",
 						},
@@ -48,9 +48,9 @@ func ExampleAlertTeardropAttack() *idmef.Message {
 					Ident: "d1c2b3a4",
 					Node: &idmef.Node{
 						Ident:    "d1c2b3a4-001",
-						Category: "dns",
+						Category: idmef.ServiceDNS,
 						Address: &idmef.Address{
-							Category: "ipv4-addr-hex",
+							Category: idmef.IPV4AddrHex,
 							Address:  "0xde796f70",
 						},
 					},

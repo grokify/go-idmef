@@ -25,7 +25,7 @@ func ExampleLocalAttacksFileModification() *idmef.Message {
 					Category: "hosts",
 					Name:     "etude",
 					Address: &idmef.Address{
-						Category: idmef.CategoryAddressIPV4,
+						Category: idmef.IPV4Addr,
 						Address:  "192.0.2.1",
 					},
 				},
@@ -37,7 +37,7 @@ func ExampleLocalAttacksFileModification() *idmef.Message {
 					Node: &idmef.Node{
 						Location: idmef.LocationConsole,
 						Address: &idmef.Address{
-							Category: idmef.CategoryAddressIPV4,
+							Category: idmef.IPV4Addr,
 							Address:  "192.0.2.1",
 						},
 					},
@@ -49,7 +49,7 @@ func ExampleLocalAttacksFileModification() *idmef.Message {
 					Node: &idmef.Node{
 						Location: idmef.LocationLocal,
 						Address: &idmef.Address{
-							Category: idmef.CategoryAddressIPV4,
+							Category: idmef.IPV4Addr,
 							Address:  "192.0.2.1",
 						},
 					},
@@ -57,16 +57,16 @@ func ExampleLocalAttacksFileModification() *idmef.Message {
 						Category: idmef.CategoryOSDevice,
 						UserId: []idmef.UserId{
 							{
-								Type:   "original-user",
+								Type:   idmef.UserIdTypeOriginalUser,
 								Number: "456",
 							},
 							{
-								Type:   "current-user",
+								Type:   idmef.UserIdTypeCurrentUser,
 								Name:   "fred",
 								Number: "456",
 							},
 							{
-								Type:   "user-privs",
+								Type:   idmef.UserIdTypeUserPrivs,
 								Number: "456",
 							},
 						},
@@ -79,7 +79,7 @@ func ExampleLocalAttacksFileModification() *idmef.Message {
 						FileAccess: []idmef.FileAccess{
 							{
 								UserId: &idmef.UserId{
-									Type:   "user-privs",
+									Type:   idmef.UserIdTypeUserPrivs,
 									Name:   "alice",
 									Number: "777",
 								},
@@ -92,7 +92,7 @@ func ExampleLocalAttacksFileModification() *idmef.Message {
 							},
 							{
 								UserId: &idmef.UserId{
-									Type:   "group-privs",
+									Type:   idmef.UserIdTypeGroupPrivs,
 									Name:   "user",
 									Number: "42",
 								},
@@ -124,7 +124,7 @@ func ExampleLocalAttacksFileModification() *idmef.Message {
 				Text: "DOM race condition",
 				Reference: []idmef.Reference{
 					{
-						Origin: "vendor-specific",
+						Origin: idmef.OriginVendorSpecific,
 						Name:   "DOM race condition",
 						URL:    "file://attack-info/race.html",
 					},
