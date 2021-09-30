@@ -100,6 +100,7 @@ The examples in RFC 4765 are included and tested in this repo. The following is 
 * [IETF RFC 4767: Recommended Transport Protocol (IDXP)](https://datatracker.ietf.org/doc/html/rfc4767)
 * [IDMEF on Wikipedia](https://en.wikipedia.org/wiki/Intrusion_Detection_Message_Exchange_Format)
 * [XML Schema-Based Minification for Communication of Security Information and Event](https://www.researchgate.net/publication/266563239_XML_Schema-Based_Minification_for_Communication_of_Security_Information_and_Event)
+* [awesome-idmef](https://github.com/SECEF/awesome-idmef)
 
 ### Alternative Formats
 
