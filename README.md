@@ -18,10 +18,6 @@
 Go library for authoring and parsing data in
 IDMEF format (IETF RFC 4765).
 
-Here's an article comparing IDMEF to other formats:
-
-[Power of the IDMEF format](https://www.prelude-siem.com/en/power-of-the-idmef-format/)
-
 ## Usage
 
 There are two sets of Message structs, one for authoring and one for parsing. The reason is due to Go's lack of support for parsing XML with tag prefixes.
@@ -108,6 +104,12 @@ See [`unmarshal.ReadFile()`](https://pkg.go.dev/github.com/grokify/go-idmef/unma
 ### Other Implementations
 
 1. PHP - https://github.com/fpoirotte/php-idmef
+
+### Comparisons
+
+1. [Power of the IDMEF format](https://www.prelude-siem.com/en/power-of-the-idmef-format/)
+1. [SDEE vs IDMEF?](https://seclists.org/focus-ids/2004/Mar/75)
+1. [Security Log Standard: Still an Open Question](https://www.scip.ch/en/?labs.20180315)
 
 ## Credits
 
