@@ -53,7 +53,7 @@ See [`unmarshal.ReadFile()`](https://pkg.go.dev/github.com/grokify/go-idmef/unma
       - [x] File
     - [x] [Classification](https://pkg.go.dev/github.com/grokify/go-idmef#Classification)
     - [x] Assessment
-    - [ ] AdditionalData
+    - [x] AdditionalData
   - [ ] Heartbeat
     - [ ] Analyzer
     - [ ] CreateTime
@@ -71,7 +71,7 @@ See [`unmarshal.ReadFile()`](https://pkg.go.dev/github.com/grokify/go-idmef/unma
   - [ ] The "loadmodule" Attack
   - [ ] The "phf" Attack
   - [x] [File Modification](testdata/example_local-attacks_file-modification.go) ([xml](testdata/example_local-attacks_file-modification.xml))
-- [ ] System Policy Violation
+- [x] [System Policy Violation](testdata/example_system-policy-violataion.go) ([xml](testdata/example_system-policy-violataion.xml))
 - [ ] Correlated Alerts
 - [x] [Analyzer Assessments](testdata/example_analyzer-assessments.go) ([xml](testdata/example_analyzer-assessments.xml))
 - [ ] Heartbeat
