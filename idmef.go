@@ -29,15 +29,16 @@ func (m *Message) Bytes(prefix, indent string) ([]byte, error) {
 }
 
 type Alert struct {
-	MessageId      string         `xml:"messageid,attr,omitempty"`
-	Analyzer       Analyzer       `xml:"idmef:Analyzer"`       // Exactly one.
-	CreateTime     Time           `xml:"idmef:CreateTime"`     // Exactly one.
-	DetectTime     *Time          `xml:"idmef:DetectTime"`     // Zero or one
-	AnalyzerTime   *Time          `xml:"idmef:AnalyzerTime"`   // Zero or one.
-	Source         []Source       `xml:"idmef:Source"`         // Zero or more.
-	Target         []Target       `xml:"idmef:Target"`         // Zero or more.
-	Classification Classification `xml:"idmef:Classification"` // Exactly one.
-	Assessment     *Assessment    `xml:"idmef:Assessment"`
+	MessageId      string           `xml:"messageid,attr,omitempty"`
+	Analyzer       Analyzer         `xml:"idmef:Analyzer"`       // Exactly one.
+	CreateTime     Time             `xml:"idmef:CreateTime"`     // Exactly one.
+	DetectTime     *Time            `xml:"idmef:DetectTime"`     // Zero or one
+	AnalyzerTime   *Time            `xml:"idmef:AnalyzerTime"`   // Zero or one.
+	Source         []Source         `xml:"idmef:Source"`         // Zero or more.
+	Target         []Target         `xml:"idmef:Target"`         // Zero or more.
+	Classification Classification   `xml:"idmef:Classification"` // Exactly one.
+	Assessment     *Assessment      `xml:"idmef:Assessment"`
+	AdditionalData []AdditionalData `xml:"idmef:AdditionalData"`
 }
 
 type Analyzer struct {
@@ -146,22 +147,6 @@ type Linkage struct {
 	Path     string `xml:"idmef:path,omitempty"`
 }
 
-/*
-<idmef:File category="current" fstype="tmpfs">
-<idmef:name>xxx000238483</idmef:name>
-<idmef:path>/tmp/xxx000238483</idmef:path>
-<idmef:FileAccess>
-	<idmef:UserId type="user-privs">
-		<idmef:name>alice</idmef:name>
-		<idmef:number>777</idmef:number>
-	</idmef:UserId>
-	<idmef:permission perms="read" />
-	<idmef:permission perms="write" />
-	<idmef:permission perms="delete" />
-	<idmef:permission perms="changePermissions" />
-</idmef:FileAccess>
-*/
-
 type Classification struct {
 	Text      string      `xml:"text,attr"`
 	Reference []Reference `xml:"idmef:Reference,omitempty"`
@@ -193,4 +178,10 @@ type Action struct {
 
 type Confidence struct {
 	Rating string `xml:"rating,attr,omitempty"`
+}
+
+type AdditionalData struct {
+	Type     string    `xml:"type,attr,omitempty"`
+	Meaning  string    `xml:"meaning,attr,omitempty"`
+	DateTime time.Time `xml:"idmef:date-time,omitempty"`
 }

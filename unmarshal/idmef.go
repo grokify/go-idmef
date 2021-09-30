@@ -46,15 +46,16 @@ func (m *Message) Bytes(prefix, indent string) ([]byte, error) {
 }
 
 type Alert struct {
-	MessageId      string         `xml:"messageid,attr,omitempty"`
-	Analyzer       Analyzer       `xml:"http://iana.org/idmef Analyzer"`
-	CreateTime     Time           `xml:"http://iana.org/idmef CreateTime"`
-	DetectTime     *Time          `xml:"http://iana.org/idmef DetectTime"`
-	AnalyzerTime   *Time          `xml:"http://iana.org/idmef AnalyzerTime"`
-	Source         []Source       `xml:"http://iana.org/idmef Source"`
-	Target         []Target       `xml:"http://iana.org/idmef Target"`
-	Classification Classification `xml:"http://iana.org/idmef Classification"`
-	Assessment     *Assessment    `xml:"http://iana.org/idmef Assessment"`
+	MessageId      string           `xml:"messageid,attr,omitempty"`
+	Analyzer       Analyzer         `xml:"http://iana.org/idmef Analyzer"`
+	CreateTime     Time             `xml:"http://iana.org/idmef CreateTime"`
+	DetectTime     *Time            `xml:"http://iana.org/idmef DetectTime"`
+	AnalyzerTime   *Time            `xml:"http://iana.org/idmef AnalyzerTime"`
+	Source         []Source         `xml:"http://iana.org/idmef Source"`
+	Target         []Target         `xml:"http://iana.org/idmef Target"`
+	Classification Classification   `xml:"http://iana.org/idmef Classification"`
+	Assessment     *Assessment      `xml:"http://iana.org/idmef Assessment"`
+	AdditionalData []AdditionalData `xml:"http://iana.org/idmef AdditionalData"`
 }
 
 func (a *Alert) Common() *idmef.Alert {
@@ -64,7 +65,8 @@ func (a *Alert) Common() *idmef.Alert {
 		CreateTime:     a.CreateTime.Common(),
 		Source:         []idmef.Source{},
 		Target:         []idmef.Target{},
-		Classification: a.Classification.Common()}
+		Classification: a.Classification.Common(),
+		AdditionalData: []idmef.AdditionalData{}}
 	if a.DetectTime != nil {
 		dt := a.DetectTime.Common()
 		cm.DetectTime = &dt
@@ -81,6 +83,9 @@ func (a *Alert) Common() *idmef.Alert {
 	}
 	if a.Assessment != nil {
 		cm.Assessment = a.Assessment.Common()
+	}
+	for _, a := range a.AdditionalData {
+		cm.AdditionalData = append(cm.AdditionalData, a.Common())
 	}
 	return cm
 }
@@ -416,4 +421,17 @@ type Confidence struct {
 func (c Confidence) Common() *idmef.Confidence {
 	return &idmef.Confidence{
 		Rating: c.Rating}
+}
+
+type AdditionalData struct {
+	Type     string    `xml:"type,attr,omitempty"`
+	Meaning  string    `xml:"meaning,attr,omitempty"`
+	DateTime time.Time `xml:"http://iana.org/idmef date-time,omitempty"`
+}
+
+func (a AdditionalData) Common() idmef.AdditionalData {
+	return idmef.AdditionalData{
+		Type:     a.Type,
+		Meaning:  a.Meaning,
+		DateTime: a.DateTime}
 }
