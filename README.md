@@ -69,7 +69,7 @@ See [`unmarshal.ReadFile()`](https://pkg.go.dev/github.com/grokify/go-idmef/unma
 
 ## Examples
 
-The examples in RFC 4765 are included and tested in this repo. The following is a lists of the examples in RFC 4765. 
+The examples in RFC 4765 are included and tested in this repo. Go and XML representations are provided, parsed and compared. The following is a lists of the examples in RFC 4765. 
 
 - [x] Denial-of-Service Attacks
   - [x] [The "teardrop" Attack](testdata/example_dos_teardrop-attack.go) ([xml](testdata/example_dos_teardrop-attack.xml))
