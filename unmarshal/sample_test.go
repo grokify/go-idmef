@@ -19,6 +19,7 @@ var xmlExampleTests = []struct {
 	{"example_port-scanning_connection-to-disallowed-service.xml", testdata.ExamplePortScanningDisallowedService},
 	{"example_port-scanning_simple-port-scanning.xml", testdata.ExamplePortScanningSimple},
 	{"example_local-attacks_file-modification.xml", testdata.ExampleLocalAttacksFileModification},
+	{"example_local-attacks_phf-attack.xml", testdata.ExampleLocalAttacksPhfAttack},
 	{"example_analyzer-assessments.xml", testdata.ExampleAlertAnalyzerAssessment},
 	{"example_system-policy-violation.xml", testdata.ExampleSystemPolicyViolation},
 	{"example_correlated-alerts.xml", testdata.ExampleAlertCorrelatedAlerts},
