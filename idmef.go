@@ -127,10 +127,17 @@ type Process struct {
 }
 
 type Service struct {
-	Ident    string `xml:"ident,attr,omitempty"`
-	Name     string `xml:"idmef:name,omitempty"`
-	Port     int    `xml:"idmef:port,omitempty"`
-	Portlist string `xml:"idmef:portlist,omitempty"`
+	Ident      string      `xml:"ident,attr,omitempty"`
+	Name       string      `xml:"idmef:name,omitempty"`
+	Port       int         `xml:"idmef:port,omitempty"`
+	Portlist   string      `xml:"idmef:portlist,omitempty"`
+	WebService *WebService `xml:"idmef:WebService,omitempty"`
+}
+
+type WebService struct {
+	URL        string `xml:"idmef:url,omitempty"`
+	CGI        string `xml:"idmef:cgi,omitempty"`
+	HTTPMethod string `xml:"idmef:http-method,omitempty"`
 }
 
 type File struct {

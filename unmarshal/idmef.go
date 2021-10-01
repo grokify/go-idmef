@@ -289,18 +289,36 @@ func (p *Process) Common() *idmef.Process {
 }
 
 type Service struct {
-	Ident    string `xml:"ident,attr,omitempty"`
-	Name     string `xml:"http://iana.org/idmef name,omitempty"`
-	Port     int    `xml:"http://iana.org/idmef port,omitempty"`
-	Portlist string `xml:"http://iana.org/idmef portlist,omitempty"`
+	Ident      string      `xml:"ident,attr,omitempty"`
+	Name       string      `xml:"http://iana.org/idmef name,omitempty"`
+	Port       int         `xml:"http://iana.org/idmef port,omitempty"`
+	Portlist   string      `xml:"http://iana.org/idmef portlist,omitempty"`
+	WebService *WebService `xml:"http://iana.org/idmef WebService,omitempty"`
 }
 
 func (s *Service) Common() *idmef.Service {
-	return &idmef.Service{
+	cs := &idmef.Service{
 		Ident:    s.Ident,
 		Name:     s.Name,
 		Port:     s.Port,
 		Portlist: s.Portlist}
+	if cs.WebService != nil {
+		cs.WebService = s.WebService.Common()
+	}
+	return cs
+}
+
+type WebService struct {
+	URL        string `xml:"http://iana.org/idmef url,omitempty"`
+	CGI        string `xml:"http://iana.org/idmef cgi,omitempty"`
+	HTTPMethod string `xml:"http://iana.org/idmef http-method,omitempty"`
+}
+
+func (w WebService) Common() *idmef.WebService {
+	return &idmef.WebService{
+		URL:        w.URL,
+		CGI:        w.CGI,
+		HTTPMethod: w.HTTPMethod}
 }
 
 type File struct {
