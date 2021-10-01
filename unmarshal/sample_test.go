@@ -22,6 +22,7 @@ var xmlExampleTests = []struct {
 	{"example_analyzer-assessments.xml", testdata.ExampleAlertAnalyzerAssessment},
 	{"example_system-policy-violation.xml", testdata.ExampleSystemPolicyViolation},
 	{"example_correlated-alerts.xml", testdata.ExampleAlertCorrelatedAlerts},
+	{"example_heartbeat.xml", testdata.ExampleHeartbeat},
 }
 
 // TestExampleAlerts ensures parse sample correct.
