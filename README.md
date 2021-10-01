@@ -63,10 +63,10 @@ See [`unmarshal.ReadFile()`](https://pkg.go.dev/github.com/grokify/go-idmef/unma
     - [x] [Assessment](https://pkg.go.dev/github.com/grokify/go-idmef#Assessment)
     - [x] [CorrelationAlert](https://pkg.go.dev/github.com/grokify/go-idmef#CorrelationAlert)
     - [x] [AdditionalData](https://pkg.go.dev/github.com/grokify/go-idmef#AdditionalData)
-  - [ ] Heartbeat
-    - [ ] Analyzer
-    - [ ] CreateTime
-    - [ ] AdditionalData
+  - [x] [Heartbeat](https://pkg.go.dev/github.com/grokify/go-idmef#Heartbeat)
+    - [x] [Analyzer](https://pkg.go.dev/github.com/grokify/go-idmef#Analyzer)
+    - [x] [CreateTime](https://pkg.go.dev/github.com/grokify/go-idmef#Time)
+    - [x] [AdditionalData](https://pkg.go.dev/github.com/grokify/go-idmef#AdditionalData)
 
 ## Examples
 
@@ -85,7 +85,7 @@ The examples in RFC 4765 are included and tested in this repo. Go and XML repres
 - [x] [System Policy Violation](testdata/example_system-policy-violation.go) ([xml](testdata/example_system-policy-violation.xml))
 - [x] [Correlated Alerts](testdata/example_correlated-alerts.go) ([xml](testdata/example_correlated-alerts.xml))
 - [x] [Analyzer Assessments](testdata/example_analyzer-assessments.go) ([xml](testdata/example_analyzer-assessments.xml))
-- [ ] Heartbeat
+- [x] [Heartbeat](testdata/example_heartbeat.go) ([xml](testdata/example_heartbeat.xml))
 
 ## Notes
 
