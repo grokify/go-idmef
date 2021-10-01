@@ -75,9 +75,9 @@ The examples in RFC 4765 are included and tested in this repo. Go and XML repres
 - [x] Denial-of-Service Attacks
   - [x] [The "teardrop" Attack](testdata/example_dos_teardrop-attack.go) ([xml](testdata/example_dos_teardrop-attack.xml))
   - [x] [The "ping of death" Attack](testdata/example_dos_pingofdeath-attack.go) ([xml](testdata/example_dos_pingofdeath-attack.xml))
-- [ ] Port Scanning Attacks
+- [x] Port Scanning Attacks
   - [x] [Connection to a Disallowed Service](testdata/example_port-scanning_connection-to-disallowed-service.go) ([xml](testdata/example_port-scanning_connection-to-disallowed-service.xml))
-  - [ ] Simple Port Scanning
+  - [x] [Simple Port Scanning](testdata/example_port-scanning_simple-port-scanning.go) ([xml](testdata/example_port-scanning_simple-port-scanning.xml))
 - [ ] Local Attacks
   - [ ] The "loadmodule" Attack
   - [ ] The "phf" Attack
