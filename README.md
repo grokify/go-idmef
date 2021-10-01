@@ -42,26 +42,27 @@ See [`unmarshal.ReadFile()`](https://pkg.go.dev/github.com/grokify/go-idmef/unma
     - [x] [AnalyzerTime](https://pkg.go.dev/github.com/grokify/go-idmef#Time)
     - [x] [Source](https://pkg.go.dev/github.com/grokify/go-idmef#Source)
       - [x] [Node](https://pkg.go.dev/github.com/grokify/go-idmef#Node)
-        - [x] Address
-      - [x] User
-        - [x] UserId
-      - [x] Process
-      - [x] Service
+        - [x] [Address](https://pkg.go.dev/github.com/grokify/go-idmef#Address)
+      - [x] [User](https://pkg.go.dev/github.com/grokify/go-idmef#User)
+        - [x] [UserId](https://pkg.go.dev/github.com/grokify/go-idmef#UserId)
+      - [x] [Process](https://pkg.go.dev/github.com/grokify/go-idmef#Process)
+      - [x] [Service](https://pkg.go.dev/github.com/grokify/go-idmef#Service)
     - [x] Target
       - [x] [Node](https://pkg.go.dev/github.com/grokify/go-idmef#Node)
-        - [x] Address
-      - [x] User
-        - [x] UserId
-      - [x] Process
-      - [x] Service
-      - [x] File
-        - [x] FileAccess
-          - [x] Permission
-        - [x] Linkage
+        - [x] [Address](https://pkg.go.dev/github.com/grokify/go-idmef#Address)
+      - [x] [User](https://pkg.go.dev/github.com/grokify/go-idmef#User)
+        - [x] [UserId](https://pkg.go.dev/github.com/grokify/go-idmef#UserId)
+      - [x] [Process](https://pkg.go.dev/github.com/grokify/go-idmef#Process)
+      - [x] [Service](https://pkg.go.dev/github.com/grokify/go-idmef#Service)
+      - [x] [File](https://pkg.go.dev/github.com/grokify/go-idmef#File)
+        - [x] FileAccess](https://pkg.go.dev/github.com/grokify/go-idmef#Classification)
+          - [x] Permission](https://pkg.go.dev/github.com/grokify/go-idmef#Classification)
+        - [x] Linkage](https://pkg.go.dev/github.com/grokify/go-idmef#Classification)
     - [x] [Classification](https://pkg.go.dev/github.com/grokify/go-idmef#Classification)
-      - [x] Reference
-    - [x] Assessment
-    - [x] AdditionalData
+      - [x] Reference](https://pkg.go.dev/github.com/grokify/go-idmef#Reference)
+    - [x] [Assessment](https://pkg.go.dev/github.com/grokify/go-idmef#Assessment)
+    - [x] [CorrelationAlert](https://pkg.go.dev/github.com/grokify/go-idmef#CorrelationAlert)
+    - [x] [AdditionalData](https://pkg.go.dev/github.com/grokify/go-idmef#AdditionalData)
   - [ ] Heartbeat
     - [ ] Analyzer
     - [ ] CreateTime
@@ -81,8 +82,8 @@ The examples in RFC 4765 are included and tested in this repo. Go and XML repres
   - [ ] The "loadmodule" Attack
   - [ ] The "phf" Attack
   - [x] [File Modification](testdata/example_local-attacks_file-modification.go) ([xml](testdata/example_local-attacks_file-modification.xml))
-- [x] [System Policy Violation](testdata/example_system-policy-violataion.go) ([xml](testdata/example_system-policy-violataion.xml))
-- [ ] Correlated Alerts
+- [x] [System Policy Violation](testdata/example_system-policy-violation.go) ([xml](testdata/example_system-policy-violation.xml))
+- [x] [Correlated Alerts](testdata/example_correlated-alerts.go) ([xml](testdata/example_correlated-alerts.xml))
 - [x] [Analyzer Assessments](testdata/example_analyzer-assessments.go) ([xml](testdata/example_analyzer-assessments.xml))
 - [ ] Heartbeat
 
