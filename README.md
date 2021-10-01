@@ -47,7 +47,7 @@ See [`unmarshal.ReadFile()`](https://pkg.go.dev/github.com/grokify/go-idmef/unma
         - [x] [UserId](https://pkg.go.dev/github.com/grokify/go-idmef#UserId)
       - [x] [Process](https://pkg.go.dev/github.com/grokify/go-idmef#Process)
       - [x] [Service](https://pkg.go.dev/github.com/grokify/go-idmef#Service)
-    - [x] Target
+    - [x] [Target](https://pkg.go.dev/github.com/grokify/go-idmef#Target)
       - [x] [Node](https://pkg.go.dev/github.com/grokify/go-idmef#Node)
         - [x] [Address](https://pkg.go.dev/github.com/grokify/go-idmef#Address)
       - [x] [User](https://pkg.go.dev/github.com/grokify/go-idmef#User)
