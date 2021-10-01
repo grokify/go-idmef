@@ -80,7 +80,7 @@ The examples in RFC 4765 are included and tested in this repo. Go and XML repres
   - [x] [Simple Port Scanning](testdata/example_port-scanning_simple-port-scanning.go) ([xml](testdata/example_port-scanning_simple-port-scanning.xml))
 - [ ] Local Attacks
   - [ ] The "loadmodule" Attack
-  - [ ] The "phf" Attack
+  - [x] [The "phf" Attack](testdata/example_local-attacks_phf-attack.go) ([xml](testdata/example_local-attacks_phf-attack.xml))
   - [x] [File Modification](testdata/example_local-attacks_file-modification.go) ([xml](testdata/example_local-attacks_file-modification.xml))
 - [x] [System Policy Violation](testdata/example_system-policy-violation.go) ([xml](testdata/example_system-policy-violation.xml))
 - [x] [Correlated Alerts](testdata/example_correlated-alerts.go) ([xml](testdata/example_correlated-alerts.xml))
