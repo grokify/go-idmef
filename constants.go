@@ -27,4 +27,6 @@ const (
 	DateTime  = "date-time"
 	StartTime = "start-time"
 	StopTime  = "stop-time"
+
+	TypeReal = "real"
 )

@@ -15,10 +15,11 @@ const (
 // Message is for authoring. For parsing use
 // `github.com/grokify/go-idmef/unmarshal/Message`.
 type Message struct {
-	XMLName    xml.Name `xml:"idmef:IDMEF-Message"`
-	XMLNSIDMEF string   `xml:"xmlns:idmef,attr"`
-	Version    string   `xml:"version,attr"`
-	Alert      *Alert   `xml:"idmef:Alert"`
+	XMLName    xml.Name   `xml:"idmef:IDMEF-Message"`
+	XMLNSIDMEF string     `xml:"xmlns:idmef,attr"`
+	Version    string     `xml:"version,attr"`
+	Alert      *Alert     `xml:"idmef:Alert"`
+	Heartbeat  *Heartbeat `xml:"idmef:Heartbeat"`
 }
 
 func (m *Message) Bytes(prefix, indent string) ([]byte, error) {
@@ -40,6 +41,13 @@ type Alert struct {
 	Assessment       *Assessment       `xml:"idmef:Assessment"`
 	CorrelationAlert *CorrelationAlert `xml:"idmef:CorrelationAlert"` // Zero or one.
 	AdditionalData   []AdditionalData  `xml:"idmef:AdditionalData"`
+}
+
+type Heartbeat struct {
+	MessageId      string           `xml:"messageid,attr,omitempty"`
+	Analyzer       Analyzer         `xml:"idmef:Analyzer"`   // Exactly one.
+	CreateTime     Time             `xml:"idmef:CreateTime"` // Exactly one.
+	AdditionalData []AdditionalData `xml:"idmef:AdditionalData"`
 }
 
 type Analyzer struct {
@@ -196,4 +204,5 @@ type AdditionalData struct {
 	Type     string    `xml:"type,attr,omitempty"`
 	Meaning  string    `xml:"meaning,attr,omitempty"`
 	DateTime time.Time `xml:"idmef:date-time,omitempty"`
+	Real     *float64  `xml:"idmef:real"`
 }

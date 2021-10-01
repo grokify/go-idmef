@@ -9,10 +9,11 @@ import (
 )
 
 type Message struct {
-	XMLName    xml.Name `xml:"http://iana.org/idmef IDMEF-Message"`
-	XMLNSIDMEF string   `xml:"xmlns:idmef,attr"`
-	Version    string   `xml:"version,attr"`
-	Alert      *Alert   `xml:"http://iana.org/idmef Alert"`
+	XMLName    xml.Name   `xml:"http://iana.org/idmef IDMEF-Message"`
+	XMLNSIDMEF string     `xml:"xmlns:idmef,attr"`
+	Version    string     `xml:"version,attr"`
+	Alert      *Alert     `xml:"http://iana.org/idmef Alert"`
+	Heartbeat  *Heartbeat `xml:"http://iana.org/idmef Heartbeat"`
 }
 
 func ReadFile(filename string) (*idmef.Message, error) {
@@ -34,6 +35,9 @@ func (m *Message) Common() *idmef.Message {
 		Version:    m.Version}
 	if m.Alert != nil {
 		cm.Alert = m.Alert.Common()
+	}
+	if m.Heartbeat != nil {
+		cm.Heartbeat = m.Heartbeat.Common()
 	}
 	return cm
 }
@@ -89,6 +93,25 @@ func (a *Alert) Common() *idmef.Alert {
 		cm.CorrelationAlert = a.CorrelationAlert.Common()
 	}
 	for _, a := range a.AdditionalData {
+		cm.AdditionalData = append(cm.AdditionalData, a.Common())
+	}
+	return cm
+}
+
+type Heartbeat struct {
+	MessageId      string           `xml:"messageid,attr,omitempty"`
+	Analyzer       Analyzer         `xml:"http://iana.org/idmef Analyzer"`
+	CreateTime     Time             `xml:"http://iana.org/idmef CreateTime"`
+	AdditionalData []AdditionalData `xml:"http://iana.org/idmef AdditionalData"`
+}
+
+func (h *Heartbeat) Common() *idmef.Heartbeat {
+	cm := &idmef.Heartbeat{
+		MessageId:      h.MessageId,
+		Analyzer:       h.Analyzer.Common(),
+		CreateTime:     h.CreateTime.Common(),
+		AdditionalData: []idmef.AdditionalData{}}
+	for _, a := range h.AdditionalData {
 		cm.AdditionalData = append(cm.AdditionalData, a.Common())
 	}
 	return cm
@@ -459,11 +482,13 @@ type AdditionalData struct {
 	Type     string    `xml:"type,attr,omitempty"`
 	Meaning  string    `xml:"meaning,attr,omitempty"`
 	DateTime time.Time `xml:"http://iana.org/idmef date-time,omitempty"`
+	Real     *float64  `xml:"http://iana.org/idmef real,omitempty"`
 }
 
 func (a AdditionalData) Common() idmef.AdditionalData {
 	return idmef.AdditionalData{
 		Type:     a.Type,
 		Meaning:  a.Meaning,
-		DateTime: a.DateTime}
+		DateTime: a.DateTime,
+		Real:     a.Real}
 }
