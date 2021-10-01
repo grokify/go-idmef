@@ -20,6 +20,7 @@ var xmlExampleTests = []struct {
 	{"example_local-attacks_file-modification.xml", testdata.ExampleLocalAttacksFileModification},
 	{"example_analyzer-assessments.xml", testdata.ExampleAlertAnalyzerAssessment},
 	{"example_system-policy-violation.xml", testdata.ExampleSystemPolicyViolation},
+	{"example_correlated-alerts.xml", testdata.ExampleAlertCorrelatedAlerts},
 }
 
 // TestExampleAlerts ensures parse sample correct.
