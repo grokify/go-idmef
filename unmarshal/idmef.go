@@ -46,16 +46,17 @@ func (m *Message) Bytes(prefix, indent string) ([]byte, error) {
 }
 
 type Alert struct {
-	MessageId      string           `xml:"messageid,attr,omitempty"`
-	Analyzer       Analyzer         `xml:"http://iana.org/idmef Analyzer"`
-	CreateTime     Time             `xml:"http://iana.org/idmef CreateTime"`
-	DetectTime     *Time            `xml:"http://iana.org/idmef DetectTime"`
-	AnalyzerTime   *Time            `xml:"http://iana.org/idmef AnalyzerTime"`
-	Source         []Source         `xml:"http://iana.org/idmef Source"`
-	Target         []Target         `xml:"http://iana.org/idmef Target"`
-	Classification Classification   `xml:"http://iana.org/idmef Classification"`
-	Assessment     *Assessment      `xml:"http://iana.org/idmef Assessment"`
-	AdditionalData []AdditionalData `xml:"http://iana.org/idmef AdditionalData"`
+	MessageId        string            `xml:"messageid,attr,omitempty"`
+	Analyzer         Analyzer          `xml:"http://iana.org/idmef Analyzer"`
+	CreateTime       Time              `xml:"http://iana.org/idmef CreateTime"`
+	DetectTime       *Time             `xml:"http://iana.org/idmef DetectTime"`
+	AnalyzerTime     *Time             `xml:"http://iana.org/idmef AnalyzerTime"`
+	Source           []Source          `xml:"http://iana.org/idmef Source"`
+	Target           []Target          `xml:"http://iana.org/idmef Target"`
+	Classification   Classification    `xml:"http://iana.org/idmef Classification"`
+	Assessment       *Assessment       `xml:"http://iana.org/idmef Assessment"`
+	CorrelationAlert *CorrelationAlert `xml:"http://iana.org/idmef CorrelationAlert"`
+	AdditionalData   []AdditionalData  `xml:"http://iana.org/idmef AdditionalData"`
 }
 
 func (a *Alert) Common() *idmef.Alert {
@@ -83,6 +84,9 @@ func (a *Alert) Common() *idmef.Alert {
 	}
 	if a.Assessment != nil {
 		cm.Assessment = a.Assessment.Common()
+	}
+	if a.CorrelationAlert != nil {
+		cm.CorrelationAlert = a.CorrelationAlert.Common()
 	}
 	for _, a := range a.AdditionalData {
 		cm.AdditionalData = append(cm.AdditionalData, a.Common())
@@ -262,16 +266,18 @@ func (p *Process) Common() *idmef.Process {
 }
 
 type Service struct {
-	Ident string `xml:"ident,attr,omitempty"`
-	Name  string `xml:"http://iana.org/idmef name,omitempty"`
-	Port  int    `xml:"http://iana.org/idmef port,omitempty"`
+	Ident    string `xml:"ident,attr,omitempty"`
+	Name     string `xml:"http://iana.org/idmef name,omitempty"`
+	Port     int    `xml:"http://iana.org/idmef port,omitempty"`
+	Portlist string `xml:"http://iana.org/idmef portlist,omitempty"`
 }
 
 func (s *Service) Common() *idmef.Service {
 	return &idmef.Service{
-		Ident: s.Ident,
-		Name:  s.Name,
-		Port:  s.Port}
+		Ident:    s.Ident,
+		Name:     s.Name,
+		Port:     s.Port,
+		Portlist: s.Portlist}
 }
 
 type File struct {
@@ -421,6 +427,32 @@ type Confidence struct {
 func (c Confidence) Common() *idmef.Confidence {
 	return &idmef.Confidence{
 		Rating: c.Rating}
+}
+
+type CorrelationAlert struct {
+	Name       string       `xml:"http://iana.org/idmef name,omitempty"`
+	AlertIdent []AlertIdent `xml:"http://iana.org/idmef alertident,omitempty"`
+}
+
+func (c CorrelationAlert) Common() *idmef.CorrelationAlert {
+	ca := &idmef.CorrelationAlert{
+		Name:       c.Name,
+		AlertIdent: []idmef.AlertIdent{}}
+	for _, alertIdent := range c.AlertIdent {
+		ca.AlertIdent = append(ca.AlertIdent, alertIdent.Common())
+	}
+	return ca
+}
+
+type AlertIdent struct {
+	AlertIdent string `xml:",chardata"`
+	AnalyzerId string `xml:"analyzerid,attr,omitempty"`
+}
+
+func (a *AlertIdent) Common() idmef.AlertIdent {
+	return idmef.AlertIdent{
+		AlertIdent: a.AlertIdent,
+		AnalyzerId: a.AnalyzerId}
 }
 
 type AdditionalData struct {

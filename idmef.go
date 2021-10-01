@@ -29,16 +29,17 @@ func (m *Message) Bytes(prefix, indent string) ([]byte, error) {
 }
 
 type Alert struct {
-	MessageId      string           `xml:"messageid,attr,omitempty"`
-	Analyzer       Analyzer         `xml:"idmef:Analyzer"`       // Exactly one.
-	CreateTime     Time             `xml:"idmef:CreateTime"`     // Exactly one.
-	DetectTime     *Time            `xml:"idmef:DetectTime"`     // Zero or one
-	AnalyzerTime   *Time            `xml:"idmef:AnalyzerTime"`   // Zero or one.
-	Source         []Source         `xml:"idmef:Source"`         // Zero or more.
-	Target         []Target         `xml:"idmef:Target"`         // Zero or more.
-	Classification Classification   `xml:"idmef:Classification"` // Exactly one.
-	Assessment     *Assessment      `xml:"idmef:Assessment"`
-	AdditionalData []AdditionalData `xml:"idmef:AdditionalData"`
+	MessageId        string            `xml:"messageid,attr,omitempty"`
+	Analyzer         Analyzer          `xml:"idmef:Analyzer"`       // Exactly one.
+	CreateTime       Time              `xml:"idmef:CreateTime"`     // Exactly one.
+	DetectTime       *Time             `xml:"idmef:DetectTime"`     // Zero or one
+	AnalyzerTime     *Time             `xml:"idmef:AnalyzerTime"`   // Zero or one.
+	Source           []Source          `xml:"idmef:Source"`         // Zero or more.
+	Target           []Target          `xml:"idmef:Target"`         // Zero or more.
+	Classification   Classification    `xml:"idmef:Classification"` // Exactly one.
+	Assessment       *Assessment       `xml:"idmef:Assessment"`
+	CorrelationAlert *CorrelationAlert `xml:"idmef:CorrelationAlert"` // Zero or one.
+	AdditionalData   []AdditionalData  `xml:"idmef:AdditionalData"`
 }
 
 type Analyzer struct {
@@ -118,9 +119,10 @@ type Process struct {
 }
 
 type Service struct {
-	Ident string `xml:"ident,attr,omitempty"`
-	Name  string `xml:"idmef:name,omitempty"`
-	Port  int    `xml:"idmef:port,omitempty"`
+	Ident    string `xml:"ident,attr,omitempty"`
+	Name     string `xml:"idmef:name,omitempty"`
+	Port     int    `xml:"idmef:port,omitempty"`
+	Portlist string `xml:"idmef:portlist,omitempty"`
 }
 
 type File struct {
@@ -178,6 +180,16 @@ type Action struct {
 
 type Confidence struct {
 	Rating string `xml:"rating,attr,omitempty"`
+}
+
+type CorrelationAlert struct {
+	Name       string       `xml:"idmef:name,omitempty"`
+	AlertIdent []AlertIdent `xml:"idmef:alertident,omitempty"`
+}
+
+type AlertIdent struct {
+	AlertIdent string `xml:",chardata"`
+	AnalyzerId string `xml:"analyzerid,attr,omitempty"`
 }
 
 type AdditionalData struct {
