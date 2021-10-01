@@ -2,6 +2,7 @@ package unmarshal
 
 import (
 	"fmt"
+	"path/filepath"
 	"testing"
 
 	"github.com/grokify/go-idmef"
@@ -9,14 +10,23 @@ import (
 	"github.com/sergi/go-diff/diffmatchpatch"
 )
 
-// TestSampleAlert ensures parse sample correct.
-func TestSampleAlert(t *testing.T) {
-	compare(t, "../testdata/example_dos_pingofdeath-attack.xml", testdata.ExampleAlertPingOfDeathAttack)
-	compare(t, "../testdata/example_dos_teardrop-attack.xml", testdata.ExampleAlertTeardropAttack)
-	compare(t, "../testdata/example_port-scanning_connection-to-disallowed-service.xml", testdata.ExamplePortScanningDisallowedService)
-	compare(t, "../testdata/example_local-attacks_file-modification.xml", testdata.ExampleLocalAttacksFileModification)
-	compare(t, "../testdata/example_analyzer-assessments.xml", testdata.ExampleAlertAnalyzerAssessment)
-	compare(t, "../testdata/example_system-policy-violation.xml", testdata.ExampleSystemPolicyViolation)
+var xmlExampleTests = []struct {
+	xmlFile string
+	goMsg   func() *idmef.Message
+}{
+	{"example_dos_pingofdeath-attack.xml", testdata.ExampleAlertPingOfDeathAttack},
+	{"example_dos_teardrop-attack.xml", testdata.ExampleAlertTeardropAttack},
+	{"example_port-scanning_connection-to-disallowed-service.xml", testdata.ExamplePortScanningDisallowedService},
+	{"example_local-attacks_file-modification.xml", testdata.ExampleLocalAttacksFileModification},
+	{"example_analyzer-assessments.xml", testdata.ExampleAlertAnalyzerAssessment},
+	{"example_system-policy-violation.xml", testdata.ExampleSystemPolicyViolation},
+}
+
+// TestExampleAlerts ensures parse sample correct.
+func TestExampleAlerts(t *testing.T) {
+	for _, tt := range xmlExampleTests {
+		compare(t, filepath.Join("../testdata/", tt.xmlFile), tt.goMsg)
+	}
 }
 
 func compare(t *testing.T, testFileXML string, sampleMessage func() *idmef.Message) {
