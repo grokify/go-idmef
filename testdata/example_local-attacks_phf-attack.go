@@ -18,6 +18,7 @@ func ExampleLocalAttacksPhfAttack() *idmef.Message {
 		XMLNSIDMEF: idmef.XMLNSIDMEFUrl,
 		Version:    idmef.XMLNSIDMEFVersion,
 		Alert: &idmef.Alert{
+			MessageId: "abc123456789",
 			Analyzer: idmef.Analyzer{
 				AnalyzerId: "bc-sensor01",
 				Node: &idmef.Node{
@@ -61,7 +62,7 @@ func ExampleLocalAttacksPhfAttack() *idmef.Message {
 						WebService: &idmef.WebService{
 							URL:        "http://www.example.com/cgi-bin/phf?/etc/group",
 							CGI:        "/cgi-bin/phf",
-							HTTPMethod: http.MethodPost,
+							HTTPMethod: http.MethodGet,
 						},
 					},
 				},

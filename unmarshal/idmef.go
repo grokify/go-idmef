@@ -293,7 +293,7 @@ type Service struct {
 	Name       string      `xml:"http://iana.org/idmef name,omitempty"`
 	Port       int         `xml:"http://iana.org/idmef port,omitempty"`
 	Portlist   string      `xml:"http://iana.org/idmef portlist,omitempty"`
-	WebService *WebService `xml:"http://iana.org/idmef WebService,omitempty"`
+	WebService *WebService `xml:"http://iana.org/idmef WebService"`
 }
 
 func (s *Service) Common() *idmef.Service {
@@ -302,7 +302,7 @@ func (s *Service) Common() *idmef.Service {
 		Name:     s.Name,
 		Port:     s.Port,
 		Portlist: s.Portlist}
-	if cs.WebService != nil {
+	if s.WebService != nil {
 		cs.WebService = s.WebService.Common()
 	}
 	return cs
