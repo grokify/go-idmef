@@ -81,7 +81,7 @@ func ExampleAlertPingOfDeathAttack() *idmef.Message {
 	return msg
 }
 
-func ExampleAlertCorrelatedAlertsString() string {
+func ExampleAlertPingOfDeathAttackString() string {
 	return `<?xml version="1.0" encoding="UTF-8"?>
 	<idmef:IDMEF-Message version="1.0"
 		xmlns:idmef="http://iana.org/idmef">
