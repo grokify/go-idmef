@@ -65,7 +65,7 @@ func ExampleAlertAnalyzerAssessment() *idmef.Message {
 						Name: "eject",
 						PID:  32451,
 						Path: "/usr/bin/eject",
-						Arg:  `\x90\x80\x3f\xff...\x08/bin/sh`,
+						Arg:  []string{`\x90\x80\x3f\xff...\x08/bin/sh`},
 					},
 				},
 			},
