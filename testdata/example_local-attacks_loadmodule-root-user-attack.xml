@@ -17,9 +17,7 @@
 				<idmef:arg>/var/logs/idlog</idmef:arg>
 			</idmef:Process>
 		</idmef:Analyzer>
-		<idmef:CreateTime ntpstamp="0xbc7221c0.0x4ccccccc">
-         2000-03-09T08:12:32.3-05:00
-       </idmef:CreateTime>
+		<idmef:CreateTime ntpstamp="0xbc7221c0.0x4ccccccc">2000-03-09T08:12:32.3-05:00</idmef:CreateTime>
 		<idmef:Source ident="a1a2">
 			<idmef:User ident="a1a2-01" category="os-device">
 				<idmef:UserId ident="a1a2-02" type="original-user">
