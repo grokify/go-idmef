@@ -126,6 +126,7 @@ The examples in RFC 4765 are included and tested in this repo. Go and XML repres
 
 1. [Power of the IDMEF format](https://www.prelude-siem.com/en/power-of-the-idmef-format/)
 1. [SDEE vs IDMEF?](https://seclists.org/focus-ids/2004/Mar/75)
+1. [IDMEF 'Lingua Franca' for Security Incident Management by Douglas Corner](https://sansorg.egnyte.com/dl/frxxyKbb9r/)
 1. [Security Log Standard: Still an Open Question](https://www.scip.ch/en/?labs.20180315)
 
 ## Credits
