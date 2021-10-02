@@ -118,18 +118,28 @@ func (h *Heartbeat) Common() *idmef.Heartbeat {
 }
 
 type Analyzer struct {
-	AnalyzerId string   `xml:"analyzerid,attr,omitempty"`
-	OSType     string   `xml:"ostype,attr,omitempty"`
-	OSVersion  string   `xml:"osversion,attr,omitempty"`
-	Node       *Node    `xml:"http://iana.org/idmef Node,omitempty"`
-	Process    *Process `xml:"http://iana.org/idmef Process,omitempty"`
+	AnalyzerId   string   `xml:"analyzerid,attr,omitempty"`
+	Name         string   `xml:"name,attr,omitempty"`
+	Manufacturer string   `xml:"manufacturer,attr,omitempty"`
+	Model        string   `xml:"model,attr,omitempty"`
+	Version      string   `xml:"version,attr,omitempty"`
+	Class        string   `xml:"class,attr,omitempty"`
+	OSType       string   `xml:"ostype,attr,omitempty"`
+	OSVersion    string   `xml:"osversion,attr,omitempty"`
+	Node         *Node    `xml:"http://iana.org/idmef Node,omitempty"`
+	Process      *Process `xml:"http://iana.org/idmef Process,omitempty"`
 }
 
 func (a *Analyzer) Common() idmef.Analyzer {
 	cm := idmef.Analyzer{
-		AnalyzerId: a.AnalyzerId,
-		OSType:     a.OSType,
-		OSVersion:  a.OSVersion}
+		AnalyzerId:   a.AnalyzerId,
+		Name:         a.Name,
+		Manufacturer: a.Manufacturer,
+		Model:        a.Model,
+		Version:      a.Version,
+		Class:        a.Class,
+		OSType:       a.OSType,
+		OSVersion:    a.OSVersion}
 	if a.Node != nil {
 		cm.Node = a.Node.Common()
 	}

@@ -51,11 +51,16 @@ type Heartbeat struct {
 }
 
 type Analyzer struct {
-	AnalyzerId string   `xml:"analyzerid,attr"`
-	OSType     string   `xml:"ostype,attr,omitempty"`
-	OSVersion  string   `xml:"osversion,attr,omitempty"`
-	Node       *Node    `xml:"idmef:Node"`
-	Process    *Process `xml:"idmef:Process"`
+	AnalyzerId   string   `xml:"analyzerid,attr"`
+	Name         string   `xml:"name,attr,omitempty"`
+	Manufacturer string   `xml:"manufacturer,attr,omitempty"`
+	Model        string   `xml:"model,attr,omitempty"`
+	Version      string   `xml:"version,attr,omitempty"`
+	Class        string   `xml:"class,attr,omitempty"`
+	OSType       string   `xml:"ostype,attr,omitempty"`
+	OSVersion    string   `xml:"osversion,attr,omitempty"`
+	Node         *Node    `xml:"idmef:Node"`
+	Process      *Process `xml:"idmef:Process"`
 }
 
 type Time struct {
