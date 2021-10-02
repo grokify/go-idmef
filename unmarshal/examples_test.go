@@ -28,8 +28,8 @@ var xmlExampleTests = []struct {
 	{"example_heartbeat.xml", testdata.ExampleHeartbeat},
 }
 
-// TestExampleAlerts ensures parse sample correct.
-func TestExampleAlerts(t *testing.T) {
+// TestExampleMessages ensures parse sample correct.
+func TestExampleMessages(t *testing.T) {
 	for _, tt := range xmlExampleTests {
 		compare(t, filepath.Join("../testdata/", tt.xmlFile), tt.goMsg)
 	}
