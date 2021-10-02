@@ -7,7 +7,6 @@ import (
 
 	"github.com/grokify/go-idmef"
 	"github.com/grokify/go-idmef/testdata"
-	"github.com/sergi/go-diff/diffmatchpatch"
 )
 
 var xmlExampleTests = []struct {
@@ -57,6 +56,8 @@ func compare(t *testing.T, testFileXML string, sampleMessage func() *idmef.Messa
 		fmt.Println(string(xGo))
 		fmt.Println(string(xFile))
 
+		/* Print diff for authoring/debugging.
+		// Use "github.com/sergi/go-diff/diffmatchpatch"
 		fmt.Println(">>> DIFF1 >>>")
 		dmp := diffmatchpatch.New()
 		diffs := dmp.DiffMain(string(xGo), string(xFile), false)
@@ -68,6 +69,7 @@ func compare(t *testing.T, testFileXML string, sampleMessage func() *idmef.Messa
 		diffs2 := dmp2.DiffMain(string(xFile), string(xGo), false)
 		fmt.Println(dmp2.DiffPrettyText(diffs2))
 		fmt.Println("<<< DIFF2 <<<")
+		*/
 
 		t.Errorf("Go does not match test file [%s]", testFileXML)
 	}
