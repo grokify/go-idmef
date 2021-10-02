@@ -73,23 +73,24 @@ See [`unmarshal.ReadFile()`](https://pkg.go.dev/github.com/grokify/go-idmef/unma
 
 ## Examples
 
-The examples in RFC 4765 are included and tested in this repo. Go and XML representations are provided, parsed and compared. The following is a lists of the examples in RFC 4765. 
+The examples in RFC 4765 are included and tested in this repo. Go and XML representations are provided, parsed and compared. The following is a lists of the examples in RFC 4765. RFC descriptions are provided.
 
-- [x] Denial-of-Service Attacks
-  - [x] [The "teardrop" Attack](testdata/example_dos_teardrop-attack.go) ([xml](testdata/example_dos_teardrop-attack.xml))
-  - [x] [The "ping of death" Attack](testdata/example_dos_pingofdeath-attack.go) ([xml](testdata/example_dos_pingofdeath-attack.xml))
-- [x] Port Scanning Attacks
-  - [x] [Connection to a Disallowed Service](testdata/example_port-scanning_connection-to-disallowed-service.go) ([xml](testdata/example_port-scanning_connection-to-disallowed-service.xml))
-  - [x] [Simple Port Scanning](testdata/example_port-scanning_simple-port-scanning.go) ([xml](testdata/example_port-scanning_simple-port-scanning.xml))
-- [x] Local Attacks
-  - [x] [The "loadmodule" Attack](testdata/example_local-attacks_loadmodule-attack.go) ([xml](testdata/example_local-attacks_loadmodule-attack.xml))
-  - [x] [The "loadmodule" Attack with root target user](testdata/example_local-attacks_loadmodule-root-user-attack.go) ([xml](testdata/example_local-attacks_loadmodule-root-user-attack.xml))
-  - [x] [The "phf" Attack](testdata/example_local-attacks_phf-attack.go) ([xml](testdata/example_local-attacks_phf-attack.xml))
-  - [x] [File Modification](testdata/example_local-attacks_file-modification.go) ([xml](testdata/example_local-attacks_file-modification.xml))
-- [x] [System Policy Violation](testdata/example_system-policy-violation.go) ([xml](testdata/example_system-policy-violation.xml))
-- [x] [Correlated Alerts](testdata/example_correlated-alerts.go) ([xml](testdata/example_correlated-alerts.xml))
-- [x] [Analyzer Assessments](testdata/example_analyzer-assessments.go) ([xml](testdata/example_analyzer-assessments.xml))
-- [x] [Heartbeat](testdata/example_heartbeat.go) ([xml](testdata/example_heartbeat.xml))
+- [x] Denial-of-Service Attacks: The following examples show how some common denial-of-service attacks could be represented in the IDMEF.
+  - [x] [The "teardrop" Attack](testdata/example_dos_teardrop-attack.go) ([xml](testdata/example_dos_teardrop-attack.xml)):  Network-based detection of the "teardrop" attack.  This shows the basic format of an alert.
+  - [x] [The "ping of death" Attack](testdata/example_dos_pingofdeath-attack.go) ([xml](testdata/example_dos_pingofdeath-attack.xml)): Network-based detection of the "ping of death" attack.  Note the identification of multiple targets, and the identification of the source as a spoofed address. NOTE: The URL has been cut to fit the IETF formating requirements.
+- [x] Port Scanning Attacks:   The following examples show how some common port scanning attacks could be represented in the IDMEF.
+  - [x] [Connection to a Disallowed Service](testdata/example_port-scanning_connection-to-disallowed-service.go) ([xml](testdata/example_port-scanning_connection-to-disallowed-service.xml)): Host-based detection of a policy violation (attempt to obtain information via "finger").  Note the identification of the target service, as well as the originating user (obtained, e.g., through RFC 1413).
+  - [x] [Simple Port Scanning](testdata/example_port-scanning_simple-port-scanning.go) ([xml](testdata/example_port-scanning_simple-port-scanning.xml)):  Network-based detection of a port scan.  This shows detection by a single analyzer; see Section 7.5 for the same attack as detected by a correlation engine.  Note the use of <portlist> to show the ports that were scanned.
+- [x] Local Attacks: The following examples show how some common local host attacks could
+   be represented in the IDMEF.
+  - [x] [The "loadmodule" Attack](testdata/example_local-attacks_loadmodule-attack.go) ([xml](testdata/example_local-attacks_loadmodule-attack.xml)): Host-based detection of the "loadmodule" exploit.  This attack involves tricking the "loadmodule" program into running another program; since "loadmodule" is set-user-id "root", the executed program runs with super-user privileges.  Note the use of <User> and <Process> to identify the user attempting the exploit and how he's doing it.
+  - [x] [The "loadmodule" Attack with root target user](testdata/example_local-attacks_loadmodule-root-user-attack.go) ([xml](testdata/example_local-attacks_loadmodule-root-user-attack.xml)):  The Intrusion Detection System (IDS) could also indicate that the target user is the "root" user, and show the attempted command; the alert might then look like:
+  - [x] [The "phf" Attack](testdata/example_local-attacks_phf-attack.go) ([xml](testdata/example_local-attacks_phf-attack.xml)): Network-based detection of the "phf" attack.  Note the use of the <WebService> element to provide more details about this particular attack.
+  - [x] [File Modification](testdata/example_local-attacks_file-modification.go) ([xml](testdata/example_local-attacks_file-modification.xml)): Host-based detection of a race condition attack.  Note the use of the <File> to provide information about the files that are used to perform the attack.
+- [x] [System Policy Violation](testdata/example_system-policy-violation.go) ([xml](testdata/example_system-policy-violation.xml)): In this example, logins are restricted to daytime hours.  The alert reports a violation of this policy that occurs when a user logs in a little after 10:00 pm.  Note the use of <AdditionalData> to provide information about the policy being violated.
+- [x] [Correlated Alerts](testdata/example_correlated-alerts.go) ([xml](testdata/example_correlated-alerts.xml)):  The following example shows how the port scan alert from Section 7.2.2 could be represented if it had been detected and sent from a correlation engine, instead of a single analyzer.
+- [x] [Analyzer Assessments](testdata/example_analyzer-assessments.go) ([xml](testdata/example_analyzer-assessments.xml)): Host-based detection of a successful unauthorized acquisition of root access through the eject buffer overflow.  Note the use of <Assessment> to provide information about the analyzer's evaluation of and reaction to the attack.
+- [x] [Heartbeat](testdata/example_heartbeat.go) ([xml](testdata/example_heartbeat.xml)):  This example shows a Heartbeat message that provides "I'm alive and working" information to the manager.  Note the use of <AdditionalData> elements, with "meaning" attributes, to provide some additional information.
 
 ## Notes
 
