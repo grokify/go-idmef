@@ -25,7 +25,7 @@ There are two sets of Message structs, one for authoring and one for parsing. Th
 
 Use the `go-idmef` (`idmef`) package structs to create the `idmef.Message` struct and then call `xml.Marshal()` or `idmef.Message.Bytes()`.
 
-Example messages from the RFC are available in the [`testdata` folder](testdata) in both XML and Go code.
+Example messages from the RFC are available in the [`testdata` folder](testdata) in both XML and Go code. These are compared in the tests](unmarshal/)
 
 ### Parsing
 
@@ -130,5 +130,5 @@ The examples in RFC 4765 are included and tested in this repo. Go and XML repres
 
 ## Credits
 
-`timestamp.Timestamp` is based on code from `github.com/coreos/mantle` under the Apache 2.0 license. This is a large, archived
-codebase with many dependencies.
+1. `timestamp.Timestamp` is based on code from [`github.com/coreos/mantle`](github.com/coreos/mantle) under the Apache 2.0 license and MIT compatible. This is a large, archived codebase with many dependencies.
+1. [`github.com/sergi/go-diff/diffmatchpatch`](https://github.com/sergi/go-diff/diffmatchpatch) is used during development to analyze failed test results.
