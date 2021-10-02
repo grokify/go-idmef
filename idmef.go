@@ -50,6 +50,15 @@ type Heartbeat struct {
 	AdditionalData []AdditionalData `xml:"idmef:AdditionalData"`
 }
 
+// Analyzer class identifies the analyzer from which the Alert or
+// Heartbeat message originates.  Only one analyzer may be encoded for
+// each alert or heartbeat, and that MUST be the analyzer at which the
+// alert or heartbeat originated.  Although the IDMEF data model does
+// not prevent the use of hierarchical intrusion detection systems
+// (where alerts get relayed up the tree), it does not provide any way
+// to record the identity of the "relay" analyzers along the path from
+// the originating analyzer to the manager that ultimately receives the
+// alert. (from RFC 4765)
 type Analyzer struct {
 	AnalyzerId   string   `xml:"analyzerid,attr"`
 	Name         string   `xml:"name,attr,omitempty"`
