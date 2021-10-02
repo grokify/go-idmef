@@ -15,8 +15,7 @@
  [license-svg]: https://img.shields.io/badge/license-MIT-blue.svg
  [license-url]: https://github.com/grokify/go-idmef/blob/master/LICENSE
 
-Go library for authoring and parsing data in
-IDMEF format (IETF RFC 4765).
+Go library for authoring and parsing data in IDMEF format ([IETF RFC 4765](https://datatracker.ietf.org/doc/html/rfc4765)).
 
 ## Usage
 
@@ -26,7 +25,7 @@ There are two sets of Message structs, one for authoring and one for parsing. Th
 
 Use the `go-idmef` (`idmef`) package structs to create the `idmef.Message` struct and then call `xml.Marshal()` or `idmef.Message.Bytes()`.
 
-An example is in the [testdata/example_pingofdeath.go](https://github.com/grokify/go-idmef/blob/v0.1.0/testdata/example_pingofdeath.go) file.
+Example messages from the RFC are available in the [`testdata` folder](testdata) in both XML and Go code.
 
 ### Parsing
 
