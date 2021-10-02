@@ -131,4 +131,4 @@ The examples in RFC 4765 are included and tested in this repo. Go and XML repres
 ## Credits
 
 1. `timestamp.Timestamp` is based on code from [`github.com/coreos/mantle`](https://github.com/coreos/mantle) under the Apache 2.0 license and MIT compatible. This is a large, archived codebase with many dependencies.
-1. `diffmatchpatch` from [`github.com/sergi/go-diff`](https://github.com/sergi/go-diff) is used during development to analyze failed test results.
+1. `diffmatchpatch` from [`github.com/sergi/go-diff`](https://github.com/sergi/go-diff) was used during development to analyze failed test results.
