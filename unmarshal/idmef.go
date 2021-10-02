@@ -118,10 +118,11 @@ func (h *Heartbeat) Common() *idmef.Heartbeat {
 }
 
 type Analyzer struct {
-	AnalyzerId string `xml:"analyzerid,attr,omitempty"`
-	OSType     string `xml:"ostype,attr,omitempty"`
-	OSVersion  string `xml:"osversion,attr,omitempty"`
-	Node       *Node  `xml:"http://iana.org/idmef Node,omitempty"`
+	AnalyzerId string   `xml:"analyzerid,attr,omitempty"`
+	OSType     string   `xml:"ostype,attr,omitempty"`
+	OSVersion  string   `xml:"osversion,attr,omitempty"`
+	Node       *Node    `xml:"http://iana.org/idmef Node,omitempty"`
+	Process    *Process `xml:"http://iana.org/idmef Process,omitempty"`
 }
 
 func (a *Analyzer) Common() idmef.Analyzer {
@@ -131,6 +132,9 @@ func (a *Analyzer) Common() idmef.Analyzer {
 		OSVersion:  a.OSVersion}
 	if a.Node != nil {
 		cm.Node = a.Node.Common()
+	}
+	if a.Process != nil {
+		cm.Process = a.Process.Common()
 	}
 	return cm
 }
@@ -274,18 +278,20 @@ func (u *UserId) Common() idmef.UserId {
 }
 
 type Process struct {
-	Name string `xml:"http://iana.org/idmef name,omitempty"`
-	PID  int    `xml:"http://iana.org/idmef pid,omitempty"`
-	Path string `xml:"http://iana.org/idmef path,omitempty"`
-	Arg  string `xml:"http://iana.org/idmef arg,omitempty"`
+	Ident string   `xml:"ident,attr,omitempty"`
+	Name  string   `xml:"http://iana.org/idmef name,omitempty"`
+	PID   int32    `xml:"http://iana.org/idmef pid,omitempty"`
+	Path  string   `xml:"http://iana.org/idmef path,omitempty"`
+	Arg   []string `xml:"http://iana.org/idmef arg,omitempty"`
 }
 
 func (p *Process) Common() *idmef.Process {
 	return &idmef.Process{
-		Name: p.Name,
-		PID:  p.PID,
-		Path: p.Path,
-		Arg:  p.Arg}
+		Ident: p.Ident,
+		Name:  p.Name,
+		PID:   p.PID,
+		Path:  p.Path,
+		Arg:   p.Arg}
 }
 
 type Service struct {
@@ -387,12 +393,14 @@ func (l *Linkage) Common() *idmef.Linkage {
 }
 
 type Classification struct {
+	Ident     string      `xml:"ident,attr,omitempty"`
 	Text      string      `xml:"text,attr"`
 	Reference []Reference `xml:"http://iana.org/idmef Reference"`
 }
 
 func (cl *Classification) Common() idmef.Classification {
 	cm := idmef.Classification{
+		Ident:     cl.Ident,
 		Text:      cl.Text,
 		Reference: []idmef.Reference{}}
 	for _, ref := range cl.Reference {

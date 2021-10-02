@@ -51,10 +51,11 @@ type Heartbeat struct {
 }
 
 type Analyzer struct {
-	AnalyzerId string `xml:"analyzerid,attr"`
-	OSType     string `xml:"ostype,attr,omitempty"`
-	OSVersion  string `xml:"osversion,attr,omitempty"`
-	Node       *Node  `xml:"idmef:Node"`
+	AnalyzerId string   `xml:"analyzerid,attr"`
+	OSType     string   `xml:"ostype,attr,omitempty"`
+	OSVersion  string   `xml:"osversion,attr,omitempty"`
+	Node       *Node    `xml:"idmef:Node"`
+	Process    *Process `xml:"idmef:Process"`
 }
 
 type Time struct {
@@ -120,10 +121,11 @@ type UserId struct {
 }
 
 type Process struct {
-	Name string `xml:"idmef:name,omitempty"`
-	PID  int    `xml:"idmef:pid,omitempty"`
-	Path string `xml:"idmef:path,omitempty"`
-	Arg  string `xml:"idmef:arg,omitempty"`
+	Ident string   `xml:"ident,attr,omitempty"`
+	Name  string   `xml:"idmef:name,omitempty"`
+	PID   int32    `xml:"idmef:pid,omitempty"`
+	Path  string   `xml:"idmef:path,omitempty"`
+	Arg   []string `xml:"idmef:arg,omitempty"`
 }
 
 type Service struct {
@@ -165,6 +167,7 @@ type Linkage struct {
 }
 
 type Classification struct {
+	Ident     string      `xml:"ident,attr,omitempty"`
 	Text      string      `xml:"text,attr"`
 	Reference []Reference `xml:"idmef:Reference,omitempty"`
 }

@@ -18,6 +18,7 @@ const (
 
 	UserIdTypeCurrentUser  = "current-user"
 	UserIdTypeOriginalUser = "original-user"
+	UserIdTypeTargetUser   = "target-user"
 	UserIdTypeGroupPrivs   = "group-privs"
 	UserIdTypeUserPrivs    = "user-privs"
 
