@@ -37,6 +37,9 @@ See [`unmarshal.ReadFile()`](https://pkg.go.dev/github.com/grokify/go-idmef/unma
 - [x] [IDMEF-Message](https://pkg.go.dev/github.com/grokify/go-idmef#Message)
   - [x] [Alert](https://pkg.go.dev/github.com/grokify/go-idmef#Alert)
     - [x] [Analyzer](https://pkg.go.dev/github.com/grokify/go-idmef#Analyzer)
+        - [x] [Node](https://pkg.go.dev/github.com/grokify/go-idmef#Node)
+          - [x] [Address](https://pkg.go.dev/github.com/grokify/go-idmef#Address)
+        - [x] [Process](https://pkg.go.dev/github.com/grokify/go-idmef#Process)
     - [x] [CreateTime](https://pkg.go.dev/github.com/grokify/go-idmef#Time)
     - [x] [DetectTime](https://pkg.go.dev/github.com/grokify/go-idmef#Time)
     - [x] [AnalyzerTime](https://pkg.go.dev/github.com/grokify/go-idmef#Time)
@@ -78,8 +81,9 @@ The examples in RFC 4765 are included and tested in this repo. Go and XML repres
 - [x] Port Scanning Attacks
   - [x] [Connection to a Disallowed Service](testdata/example_port-scanning_connection-to-disallowed-service.go) ([xml](testdata/example_port-scanning_connection-to-disallowed-service.xml))
   - [x] [Simple Port Scanning](testdata/example_port-scanning_simple-port-scanning.go) ([xml](testdata/example_port-scanning_simple-port-scanning.xml))
-- [ ] Local Attacks
-  - [ ] The "loadmodule" Attack
+- [x] Local Attacks
+  - [x] [The "loadmodule" Attack](testdata/example_local-attacks_loadmodule-attack.go) ([xml](testdata/example_local-attacks_loadmodule-attack.xml))
+  - [x] [The "loadmodule" Attack with root target user](testdata/example_local-attacks_loadmodule-root-user-attack.go) ([xml](testdata/example_local-attacks_loadmodule-root-user-attack.xml))
   - [x] [The "phf" Attack](testdata/example_local-attacks_phf-attack.go) ([xml](testdata/example_local-attacks_phf-attack.xml))
   - [x] [File Modification](testdata/example_local-attacks_file-modification.go) ([xml](testdata/example_local-attacks_file-modification.xml))
 - [x] [System Policy Violation](testdata/example_system-policy-violation.go) ([xml](testdata/example_system-policy-violation.xml))
