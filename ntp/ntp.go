@@ -6,8 +6,8 @@ import (
 	"time"
 )
 
-// JAN_1970 is the Unix Epoch in NTP Seconds (1970 - 1900)
-const JAN_1970 = 2208988800
+// EpochNTPSeconds is the Unix Epoch (1970-01-01T00:00:00Z) in NTP Seconds (1970 - 1900)
+const EpochNTPSeconds = 2208988800
 
 // Timestamp represents a NTP timestamp. The code is from
 // `github.com/coreos/mantle` under the Apache 2.0 license.
@@ -23,7 +23,7 @@ func Now() Timestamp {
 
 // NewTimestamp converts from Go's Time to NTP's 64-bit Timestamp format.
 func NewTimestamp(t time.Time) Timestamp {
-	secs := t.Unix() + JAN_1970
+	secs := t.Unix() + EpochNTPSeconds
 	// Convert from range [0,999999999] to [0,UINT32_MAX]
 	frac := (uint64(t.Nanosecond()) << 32) / 1000000000
 	return Timestamp{Seconds: uint32(secs), Fraction: uint32(frac)}
@@ -34,6 +34,6 @@ func (ts Timestamp) String() string {
 		fmt.Sprintf("%08s", strconv.FormatInt(int64(ts.Fraction), 16))
 }
 
-func TimeToNtp(t time.Time) string {
+func TimeToNTP(t time.Time) string {
 	return NewTimestamp(t).String()
 }

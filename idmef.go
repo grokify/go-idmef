@@ -84,7 +84,7 @@ func NewTime(t time.Time) Time {
 }
 
 func (t *Time) InflateNtpStamp() {
-	t.NtpStamp = ntp.TimeToNtp(t.Time)
+	t.NtpStamp = ntp.TimeToNTP(t.Time)
 }
 
 type Source struct {
