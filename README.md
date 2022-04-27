@@ -121,6 +121,7 @@ The examples in RFC 4765 are included and tested in this repo. Go and XML repres
 ### Other Implementations
 
 1. PHP - https://github.com/fpoirotte/php-idmef
+1. Protocol Buffers - https://github.com/DaGuich/IDMEF_protobuf
 
 ### Comparisons
 
