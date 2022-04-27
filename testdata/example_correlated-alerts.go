@@ -14,12 +14,12 @@ func ExampleAlertCorrelatedAlerts() *idmef.Message {
 		panic(err)
 	}
 	msg := &idmef.Message{
-		XMLNSIDMEF: idmef.XMLNSIDMEFUrl,
+		XMLNSIDMEF: idmef.XMLNSIDMEFURL,
 		Version:    idmef.XMLNSIDMEFVersion,
 		Alert: &idmef.Alert{
-			MessageId: "abc123456789",
+			MessageID: "abc123456789",
 			Analyzer: idmef.Analyzer{
-				AnalyzerId: "bc-corr-01",
+				AnalyzerID: "bc-corr-01",
 				Node: &idmef.Node{
 					Category: idmef.ServiceDNS,
 					Name:     "correlator01.example.com",
@@ -75,8 +75,8 @@ func ExampleAlertCorrelatedAlerts() *idmef.Message {
 					{AlertIdent: "123456784"},
 					{AlertIdent: "123456785"},
 					{AlertIdent: "123456786"},
-					{AlertIdent: "987654321", AnalyzerId: "a1b2c3d4"},
-					{AlertIdent: "987654322", AnalyzerId: "a1b2c3d4"},
+					{AlertIdent: "987654321", AnalyzerID: "a1b2c3d4"},
+					{AlertIdent: "987654322", AnalyzerID: "a1b2c3d4"},
 				},
 			},
 		},

@@ -31,7 +31,7 @@ func ReadFile(filename string) (*idmef.Message, error) {
 
 func (m *Message) Common() *idmef.Message {
 	cm := &idmef.Message{
-		XMLNSIDMEF: idmef.XMLNSIDMEFUrl,
+		XMLNSIDMEF: idmef.XMLNSIDMEFURL,
 		Version:    m.Version}
 	if m.Alert != nil {
 		cm.Alert = m.Alert.Common()
@@ -50,7 +50,7 @@ func (m *Message) Bytes(prefix, indent string) ([]byte, error) {
 }
 
 type Alert struct {
-	MessageId        string            `xml:"messageid,attr,omitempty"`
+	MessageID        string            `xml:"messageid,attr,omitempty"`
 	Analyzer         Analyzer          `xml:"http://iana.org/idmef Analyzer"`
 	CreateTime       Time              `xml:"http://iana.org/idmef CreateTime"`
 	DetectTime       *Time             `xml:"http://iana.org/idmef DetectTime"`
@@ -65,7 +65,7 @@ type Alert struct {
 
 func (a *Alert) Common() *idmef.Alert {
 	cm := &idmef.Alert{
-		MessageId:      a.MessageId,
+		MessageID:      a.MessageID,
 		Analyzer:       a.Analyzer.Common(),
 		CreateTime:     a.CreateTime.Common(),
 		Source:         []idmef.Source{},
@@ -99,7 +99,7 @@ func (a *Alert) Common() *idmef.Alert {
 }
 
 type Heartbeat struct {
-	MessageId      string           `xml:"messageid,attr,omitempty"`
+	MessageID      string           `xml:"messageid,attr,omitempty"`
 	Analyzer       Analyzer         `xml:"http://iana.org/idmef Analyzer"`
 	CreateTime     Time             `xml:"http://iana.org/idmef CreateTime"`
 	AdditionalData []AdditionalData `xml:"http://iana.org/idmef AdditionalData"`
@@ -107,7 +107,7 @@ type Heartbeat struct {
 
 func (h *Heartbeat) Common() *idmef.Heartbeat {
 	cm := &idmef.Heartbeat{
-		MessageId:      h.MessageId,
+		MessageID:      h.MessageID,
 		Analyzer:       h.Analyzer.Common(),
 		CreateTime:     h.CreateTime.Common(),
 		AdditionalData: []idmef.AdditionalData{}}
@@ -127,7 +127,7 @@ func (h *Heartbeat) Common() *idmef.Heartbeat {
 // the originating analyzer to the manager that ultimately receives the
 // alert. (from RFC 4765)
 type Analyzer struct {
-	AnalyzerId   string   `xml:"analyzerid,attr,omitempty"`
+	AnalyzerID   string   `xml:"analyzerid,attr,omitempty"`
 	Name         string   `xml:"name,attr,omitempty"`
 	Manufacturer string   `xml:"manufacturer,attr,omitempty"`
 	Model        string   `xml:"model,attr,omitempty"`
@@ -141,7 +141,7 @@ type Analyzer struct {
 
 func (a *Analyzer) Common() idmef.Analyzer {
 	cm := idmef.Analyzer{
-		AnalyzerId:   a.AnalyzerId,
+		AnalyzerID:   a.AnalyzerID,
 		Name:         a.Name,
 		Manufacturer: a.Manufacturer,
 		Model:        a.Model,
@@ -267,29 +267,29 @@ func (a *Address) Common() *idmef.Address {
 type User struct {
 	Ident    string   `xml:"ident,attr,omitempty"`
 	Category string   `xml:"category,attr,omitempty"`
-	UserId   []UserId `xml:"http://iana.org/idmef UserId,omitempty"`
+	UserID   []UserID `xml:"http://iana.org/idmef UserId,omitempty"`
 }
 
 func (u *User) Common() *idmef.User {
 	uc := &idmef.User{
 		Ident:    u.Ident,
 		Category: u.Category,
-		UserId:   []idmef.UserId{}}
-	for _, usrId := range u.UserId {
-		uc.UserId = append(uc.UserId, usrId.Common())
+		UserID:   []idmef.UserID{}}
+	for _, usrID := range u.UserID {
+		uc.UserID = append(uc.UserID, usrID.Common())
 	}
 	return uc
 }
 
-type UserId struct {
+type UserID struct {
 	Ident  string `xml:"ident,attr,omitempty"`
 	Type   string `xml:"type,attr,omitempty"`
 	Name   string `xml:"http://iana.org/idmef name,omitempty"`
 	Number string `xml:"http://iana.org/idmef number,omitempty"`
 }
 
-func (u *UserId) Common() idmef.UserId {
-	return idmef.UserId{
+func (u *UserID) Common() idmef.UserID {
+	return idmef.UserID{
 		Ident:  u.Ident,
 		Type:   u.Type,
 		Name:   u.Name,
@@ -372,16 +372,16 @@ func (f *File) Common() *idmef.File {
 }
 
 type FileAccess struct {
-	UserId     *UserId      `xml:"http://iana.org/idmef UserId,omitempty"`
+	UserID     *UserID      `xml:"http://iana.org/idmef UserId,omitempty"`
 	Permission []Permission `xml:"http://iana.org/idmef permission,omitempty"`
 }
 
 func (f FileAccess) Common() idmef.FileAccess {
 	cf := idmef.FileAccess{
 		Permission: []idmef.Permission{}}
-	if f.UserId != nil {
-		cu := f.UserId.Common()
-		cf.UserId = &cu
+	if f.UserID != nil {
+		cu := f.UserID.Common()
+		cf.UserID = &cu
 	}
 	for _, p := range f.Permission {
 		cf.Permission = append(cf.Permission, p.Common())
@@ -514,13 +514,13 @@ func (c CorrelationAlert) Common() *idmef.CorrelationAlert {
 
 type AlertIdent struct {
 	AlertIdent string `xml:",chardata"`
-	AnalyzerId string `xml:"analyzerid,attr,omitempty"`
+	AnalyzerID string `xml:"analyzerid,attr,omitempty"`
 }
 
 func (a *AlertIdent) Common() idmef.AlertIdent {
 	return idmef.AlertIdent{
 		AlertIdent: a.AlertIdent,
-		AnalyzerId: a.AnalyzerId}
+		AnalyzerID: a.AnalyzerID}
 }
 
 type AdditionalData struct {

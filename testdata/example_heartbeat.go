@@ -16,12 +16,12 @@ func ExampleHeartbeat() *idmef.Message {
 	memused := float64(62.5)
 	diskused := float64(87.1)
 	msg := &idmef.Message{
-		XMLNSIDMEF: idmef.XMLNSIDMEFUrl,
+		XMLNSIDMEF: idmef.XMLNSIDMEFURL,
 		Version:    idmef.XMLNSIDMEFVersion,
 		Heartbeat: &idmef.Heartbeat{
-			MessageId: "abc123456789",
+			MessageID: "abc123456789",
 			Analyzer: idmef.Analyzer{
-				AnalyzerId: "hq-dmz-analyzer01",
+				AnalyzerID: "hq-dmz-analyzer01",
 				Node: &idmef.Node{
 					Category: idmef.ServiceDNS,
 					Location: "Headquarters DMZ Network",

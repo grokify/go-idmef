@@ -14,12 +14,12 @@ func ExamplePortScanningDisallowedService() *idmef.Message {
 		panic(err)
 	}
 	msg := &idmef.Message{
-		XMLNSIDMEF: idmef.XMLNSIDMEFUrl,
+		XMLNSIDMEF: idmef.XMLNSIDMEFURL,
 		Version:    idmef.XMLNSIDMEFVersion,
 		Alert: &idmef.Alert{
-			MessageId: "abc123456789",
+			MessageID: "abc123456789",
 			Analyzer: idmef.Analyzer{
-				AnalyzerId: "bc-sensor01",
+				AnalyzerID: "bc-sensor01",
 				Node: &idmef.Node{
 					Category: idmef.ServiceDNS,
 					Name:     "sensor.example.com",
@@ -40,7 +40,7 @@ func ExamplePortScanningDisallowedService() *idmef.Message {
 					User: &idmef.User{
 						Ident:    "q987-03",
 						Category: idmef.CategoryOSDevice,
-						UserId: []idmef.UserId{{
+						UserID: []idmef.UserID{{
 							Ident: "q987-04",
 							Type:  "target-user",
 							Name:  "badguy",

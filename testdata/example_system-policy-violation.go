@@ -22,12 +22,12 @@ func ExampleSystemPolicyViolation() *idmef.Message {
 		panic(err)
 	}
 	msg := &idmef.Message{
-		XMLNSIDMEF: idmef.XMLNSIDMEFUrl,
+		XMLNSIDMEF: idmef.XMLNSIDMEFURL,
 		Version:    idmef.XMLNSIDMEFVersion,
 		Alert: &idmef.Alert{
-			MessageId: "abc123456789",
+			MessageID: "abc123456789",
 			Analyzer: idmef.Analyzer{
-				AnalyzerId: "bc-ds-01",
+				AnalyzerID: "bc-ds-01",
 				Node: &idmef.Node{
 					Category: idmef.ServiceDNS,
 					Name:     "dialserver.example.com",
@@ -61,9 +61,9 @@ func ExampleSystemPolicyViolation() *idmef.Message {
 					User: &idmef.User{
 						Ident:    "t01-2",
 						Category: idmef.CategoryOSDevice,
-						UserId: []idmef.UserId{{
+						UserID: []idmef.UserID{{
 							Ident:  "t01-3",
-							Type:   idmef.UserIdTypeCurrentUser,
+							Type:   idmef.UserIDTypeCurrentUser,
 							Name:   "louis",
 							Number: "501",
 						}},

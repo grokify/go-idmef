@@ -14,11 +14,11 @@ func ExampleAlertAnalyzerAssessment() *idmef.Message {
 		panic(err)
 	}
 	msg := &idmef.Message{
-		XMLNSIDMEF: idmef.XMLNSIDMEFUrl,
+		XMLNSIDMEF: idmef.XMLNSIDMEFURL,
 		Version:    idmef.XMLNSIDMEFVersion,
 		Alert: &idmef.Alert{
 			Analyzer: idmef.Analyzer{
-				AnalyzerId: "bids-192.0.2.1",
+				AnalyzerID: "bids-192.0.2.1",
 			},
 			CreateTime: idmef.NewTime(dt),
 			Source: []idmef.Source{
@@ -45,18 +45,18 @@ func ExampleAlertAnalyzerAssessment() *idmef.Message {
 					},
 					User: &idmef.User{
 						Category: idmef.CategoryOSDevice,
-						UserId: []idmef.UserId{
+						UserID: []idmef.UserID{
 							{
-								Type:   idmef.UserIdTypeOriginalUser,
+								Type:   idmef.UserIDTypeOriginalUser,
 								Number: "456",
 							},
 							{
-								Type:   idmef.UserIdTypeCurrentUser,
+								Type:   idmef.UserIDTypeCurrentUser,
 								Name:   "root",
 								Number: "0",
 							},
 							{
-								Type:   idmef.UserIdTypeUserPrivs,
+								Type:   idmef.UserIDTypeUserPrivs,
 								Number: "0",
 							},
 						},

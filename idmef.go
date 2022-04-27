@@ -8,7 +8,7 @@ import (
 )
 
 const (
-	XMLNSIDMEFUrl     = "http://iana.org/idmef"
+	XMLNSIDMEFURL     = "http://iana.org/idmef"
 	XMLNSIDMEFVersion = "1.0"
 )
 
@@ -30,7 +30,7 @@ func (m *Message) Bytes(prefix, indent string) ([]byte, error) {
 }
 
 type Alert struct {
-	MessageId        string            `xml:"messageid,attr,omitempty"`
+	MessageID        string            `xml:"messageid,attr,omitempty"`
 	Analyzer         Analyzer          `xml:"idmef:Analyzer"`       // Exactly one.
 	CreateTime       Time              `xml:"idmef:CreateTime"`     // Exactly one.
 	DetectTime       *Time             `xml:"idmef:DetectTime"`     // Zero or one
@@ -44,7 +44,7 @@ type Alert struct {
 }
 
 type Heartbeat struct {
-	MessageId      string           `xml:"messageid,attr,omitempty"`
+	MessageID      string           `xml:"messageid,attr,omitempty"`
 	Analyzer       Analyzer         `xml:"idmef:Analyzer"`   // Exactly one.
 	CreateTime     Time             `xml:"idmef:CreateTime"` // Exactly one.
 	AdditionalData []AdditionalData `xml:"idmef:AdditionalData"`
@@ -60,7 +60,7 @@ type Heartbeat struct {
 // the originating analyzer to the manager that ultimately receives the
 // alert. (from RFC 4765)
 type Analyzer struct {
-	AnalyzerId   string   `xml:"analyzerid,attr"`
+	AnalyzerID   string   `xml:"analyzerid,attr"`
 	Name         string   `xml:"name,attr,omitempty"`
 	Manufacturer string   `xml:"manufacturer,attr,omitempty"`
 	Model        string   `xml:"model,attr,omitempty"`
@@ -124,10 +124,10 @@ type Address struct {
 type User struct {
 	Ident    string   `xml:"ident,attr,omitempty"`
 	Category string   `xml:"category,attr,omitempty"`
-	UserId   []UserId `xml:"idmef:UserId,omitempty"`
+	UserID   []UserID `xml:"idmef:UserId,omitempty"`
 }
 
-type UserId struct {
+type UserID struct {
 	Ident  string `xml:"ident,attr,omitempty"`
 	Type   string `xml:"type,attr,omitempty"`
 	Name   string `xml:"idmef:name,omitempty"`
@@ -166,7 +166,7 @@ type File struct {
 }
 
 type FileAccess struct {
-	UserId     *UserId      `xml:"idmef:UserId,omitempty"`
+	UserID     *UserID      `xml:"idmef:UserId,omitempty"`
 	Permission []Permission `xml:"idmef:permission,omitempty"`
 }
 
@@ -221,7 +221,7 @@ type CorrelationAlert struct {
 
 type AlertIdent struct {
 	AlertIdent string `xml:",chardata"`
-	AnalyzerId string `xml:"analyzerid,attr,omitempty"`
+	AnalyzerID string `xml:"analyzerid,attr,omitempty"`
 }
 
 type AdditionalData struct {

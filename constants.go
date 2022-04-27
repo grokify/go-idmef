@@ -16,11 +16,11 @@ const (
 	ServiceNIS     = "nis"
 	ServiceNISPlus = "nisplus"
 
-	UserIdTypeCurrentUser  = "current-user"
-	UserIdTypeOriginalUser = "original-user"
-	UserIdTypeTargetUser   = "target-user"
-	UserIdTypeGroupPrivs   = "group-privs"
-	UserIdTypeUserPrivs    = "user-privs"
+	UserIDTypeCurrentUser  = "current-user"
+	UserIDTypeOriginalUser = "original-user"
+	UserIDTypeTargetUser   = "target-user"
+	UserIDTypeGroupPrivs   = "group-privs"
+	UserIDTypeUserPrivs    = "user-privs"
 
 	OriginUserSpecific   = "user-specific"
 	OriginVendorSpecific = "vendor-specific"

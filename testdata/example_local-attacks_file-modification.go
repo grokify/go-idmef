@@ -14,11 +14,11 @@ func ExampleLocalAttacksFileModification() *idmef.Message {
 		panic(err)
 	}
 	msg := &idmef.Message{
-		XMLNSIDMEF: idmef.XMLNSIDMEFUrl,
+		XMLNSIDMEF: idmef.XMLNSIDMEFURL,
 		Version:    idmef.XMLNSIDMEFVersion,
 		Alert: &idmef.Alert{
 			Analyzer: idmef.Analyzer{
-				AnalyzerId: "bids-192.0.2.1",
+				AnalyzerID: "bids-192.0.2.1",
 				OSType:     "Linux",
 				OSVersion:  "2.2.16-3",
 				Node: &idmef.Node{
@@ -55,18 +55,18 @@ func ExampleLocalAttacksFileModification() *idmef.Message {
 					},
 					User: &idmef.User{
 						Category: idmef.CategoryOSDevice,
-						UserId: []idmef.UserId{
+						UserID: []idmef.UserID{
 							{
-								Type:   idmef.UserIdTypeOriginalUser,
+								Type:   idmef.UserIDTypeOriginalUser,
 								Number: "456",
 							},
 							{
-								Type:   idmef.UserIdTypeCurrentUser,
+								Type:   idmef.UserIDTypeCurrentUser,
 								Name:   "fred",
 								Number: "456",
 							},
 							{
-								Type:   idmef.UserIdTypeUserPrivs,
+								Type:   idmef.UserIDTypeUserPrivs,
 								Number: "456",
 							},
 						},
@@ -78,8 +78,8 @@ func ExampleLocalAttacksFileModification() *idmef.Message {
 						Path:     "/tmp/xxx000238483",
 						FileAccess: []idmef.FileAccess{
 							{
-								UserId: &idmef.UserId{
-									Type:   idmef.UserIdTypeUserPrivs,
+								UserID: &idmef.UserID{
+									Type:   idmef.UserIDTypeUserPrivs,
 									Name:   "alice",
 									Number: "777",
 								},
@@ -91,8 +91,8 @@ func ExampleLocalAttacksFileModification() *idmef.Message {
 								},
 							},
 							{
-								UserId: &idmef.UserId{
-									Type:   idmef.UserIdTypeGroupPrivs,
+								UserID: &idmef.UserID{
+									Type:   idmef.UserIDTypeGroupPrivs,
 									Name:   "user",
 									Number: "42",
 								},
@@ -103,7 +103,7 @@ func ExampleLocalAttacksFileModification() *idmef.Message {
 								},
 							},
 							{
-								UserId: &idmef.UserId{
+								UserID: &idmef.UserID{
 									Type: "other-privs",
 									Name: "world",
 								},

@@ -14,12 +14,12 @@ func ExampleLocalAttacksLoadModuleRootUserAttack() *idmef.Message {
 		panic(err)
 	}
 	msg := &idmef.Message{
-		XMLNSIDMEF: idmef.XMLNSIDMEFUrl,
+		XMLNSIDMEF: idmef.XMLNSIDMEFURL,
 		Version:    idmef.XMLNSIDMEFVersion,
 		Alert: &idmef.Alert{
-			MessageId: "abc123456789",
+			MessageID: "abc123456789",
 			Analyzer: idmef.Analyzer{
-				AnalyzerId: "bc-fs-sensor13",
+				AnalyzerID: "bc-fs-sensor13",
 				Node: &idmef.Node{
 					Category: idmef.ServiceDNS,
 					Name:     "fileserver.example.com",
@@ -39,9 +39,9 @@ func ExampleLocalAttacksLoadModuleRootUserAttack() *idmef.Message {
 					User: &idmef.User{
 						Ident:    "a1a2-01",
 						Category: idmef.CategoryOSDevice,
-						UserId: []idmef.UserId{{
+						UserID: []idmef.UserID{{
 							Ident:  "a1a2-02",
-							Type:   idmef.UserIdTypeOriginalUser,
+							Type:   idmef.UserIDTypeOriginalUser,
 							Name:   "joe",
 							Number: "13243",
 						}},
@@ -64,9 +64,9 @@ func ExampleLocalAttacksLoadModuleRootUserAttack() *idmef.Message {
 					User: &idmef.User{
 						Ident:    "z3z4-02",
 						Category: idmef.CategoryOSDevice,
-						UserId: []idmef.UserId{{
+						UserID: []idmef.UserID{{
 							Ident:  "z3z4-03",
-							Type:   idmef.UserIdTypeTargetUser,
+							Type:   idmef.UserIDTypeTargetUser,
 							Name:   "root",
 							Number: "0",
 						}},

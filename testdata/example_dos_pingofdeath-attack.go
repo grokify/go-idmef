@@ -14,12 +14,12 @@ func ExampleAlertPingOfDeathAttack() *idmef.Message {
 		panic(err)
 	}
 	msg := &idmef.Message{
-		XMLNSIDMEF: idmef.XMLNSIDMEFUrl,
+		XMLNSIDMEF: idmef.XMLNSIDMEFURL,
 		Version:    idmef.XMLNSIDMEFVersion,
 		Alert: &idmef.Alert{
-			MessageId: "abc123456789",
+			MessageID: "abc123456789",
 			Analyzer: idmef.Analyzer{
-				AnalyzerId: "bc-sensor01",
+				AnalyzerID: "bc-sensor01",
 				Node: &idmef.Node{
 					Category: idmef.ServiceDNS,
 					Name:     "sensor.example.com",

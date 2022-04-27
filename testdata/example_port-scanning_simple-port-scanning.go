@@ -14,12 +14,12 @@ func ExamplePortScanningSimple() *idmef.Message {
 		panic(err)
 	}
 	msg := &idmef.Message{
-		XMLNSIDMEF: idmef.XMLNSIDMEFUrl,
+		XMLNSIDMEF: idmef.XMLNSIDMEFURL,
 		Version:    idmef.XMLNSIDMEFVersion,
 		Alert: &idmef.Alert{
-			MessageId: "abc123456789",
+			MessageID: "abc123456789",
 			Analyzer: idmef.Analyzer{
-				AnalyzerId: "hq-dmz-analyzer62",
+				AnalyzerID: "hq-dmz-analyzer62",
 				Node: &idmef.Node{
 					Category: idmef.ServiceDNS,
 					Location: "Headquarters Web Server",
