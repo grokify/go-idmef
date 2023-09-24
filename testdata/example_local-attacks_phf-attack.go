@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/grokify/go-idmef"
+	idmef "github.com/grokify/go-idmef"
 )
 
 // ExampleLocalAttacksPhfAttack provides the sample file from

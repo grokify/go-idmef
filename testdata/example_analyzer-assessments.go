@@ -3,7 +3,7 @@ package testdata
 import (
 	"time"
 
-	"github.com/grokify/go-idmef"
+	idmef "github.com/grokify/go-idmef"
 )
 
 // ExampleAlertAnalyzerAssessment provides the sample file from

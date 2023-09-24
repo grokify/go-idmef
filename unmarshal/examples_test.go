@@ -5,7 +5,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/grokify/go-idmef"
+	idmef "github.com/grokify/go-idmef"
 	"github.com/grokify/go-idmef/testdata"
 )
 

@@ -5,7 +5,7 @@ import (
 	"io/ioutil"
 	"time"
 
-	"github.com/grokify/go-idmef"
+	idmef "github.com/grokify/go-idmef"
 )
 
 type Message struct {
