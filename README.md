@@ -17,9 +17,21 @@
 
 Go library for authoring and parsing data in IDMEF format ([IETF RFC 4765](https://datatracker.ietf.org/doc/html/rfc4765)).
 
+## Why IDMEF?
+
+IDMEF has a few characteristics which make it attrative to use.
+
+1. It is an IETF RFC
+1. It is well-defined
+1. It is vendor agnostic
+
+Some SIEMs can use it directly and it can be used as an intermediate format to translate vendor specific events to vendor specific consumers. Some formats of consideration are AWS CloudTrail (both CloudTrail>IDMEF and IDMEF>CloudTrail) and Google Chronicle (IDMEF>Chronicle).
+
 ## Usage
 
 There are two sets of Message structs, one for authoring and one for parsing. The reason is due to Go's lack of support for parsing XML with tag prefixes.
+
+> Note on JSON: since these are provided as Go structs, it is very easy to convert to JSON. Today, there are no JSON tags but they may be added in the future after some investigation. The things to investigate are use of camelCase vs. PascalCase for JSON property names: (a) whether both should be used to map to the XML structure or (b) whether only one should be used (likely lower camelCase) to be consistent with JSON.
 
 ### Authoring
 
@@ -32,6 +44,8 @@ Example messages from the RFC are available in the [`testdata` folder](testdata)
 See [`unmarshal.ReadFile()`](https://pkg.go.dev/github.com/grokify/go-idmef/unmarshal#ReadFile) function for an example to parse aa IDMEF XML file.
 
 ## Coverage
+
+This list shows the defined objects. See the [RFC model overview](rfc_model-overview.txt) for reference.
 
 - [x] [IDMEF-Message](https://pkg.go.dev/github.com/grokify/go-idmef#Message)
   - [x] [Alert](https://pkg.go.dev/github.com/grokify/go-idmef#Alert)
@@ -91,6 +105,10 @@ The examples in RFC 4765 are included and tested in this repo. Go and XML repres
 - [x] [Analyzer Assessments](testdata/example_analyzer-assessments.go) ([xml](testdata/example_analyzer-assessments.xml)): Host-based detection of a successful unauthorized acquisition of root access through the eject buffer overflow.  Note the use of <Assessment> to provide information about the analyzer's evaluation of and reaction to the attack.
 - [x] [Heartbeat](testdata/example_heartbeat.go) ([xml](testdata/example_heartbeat.xml)):  This example shows a Heartbeat message that provides "I'm alive and working" information to the manager.  Note the use of <AdditionalData> elements, with "meaning" attributes, to provide some additional information.
 
+## TODO
+
+1. Furhter dtail struct 
+
 ## Notes
 
 1. `idmef` is the authoring package and creates XML with the `idmef` tag.
@@ -121,7 +139,6 @@ The examples in RFC 4765 are included and tested in this repo. Go and XML repres
 ### Other Implementations
 
 1. PHP - https://github.com/fpoirotte/php-idmef
-1. Protocol Buffers - https://github.com/DaGuich/IDMEF_protobuf
 
 ### Comparisons
 
