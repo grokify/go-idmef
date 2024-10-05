@@ -2,7 +2,7 @@ package unmarshal
 
 import (
 	"encoding/xml"
-	"io/ioutil"
+	"os"
 	"time"
 
 	idmef "github.com/grokify/go-idmef"
@@ -17,7 +17,7 @@ type Message struct {
 }
 
 func ReadFile(filename string) (*idmef.Message, error) {
-	fdata, err := ioutil.ReadFile(filename)
+	fdata, err := os.ReadFile(filename)
 	if err != nil {
 		return nil, err
 	}
